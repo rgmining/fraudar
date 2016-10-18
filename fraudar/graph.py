@@ -3,6 +3,8 @@ from bisect import bisect_left
 from collections import defaultdict
 import tempfile
 
+import numpy as np
+
 from fraudar.export import greedy
 
 class _Node(object):
@@ -19,6 +21,8 @@ class _Node(object):
       graph: graph object this node belongs to.
       name: name of this node.
     """
+    __slots__ = ("graph", "name")
+
     def __init__(self, graph, name):
         """Construct a node instance.
 
@@ -46,6 +50,8 @@ class Reviewer(_Node):
       name: name of this reviewer.
       anomalous_score: anomalous score.
     """
+    __slots__ = ("anomalous_score",)
+
     def __init__(self, graph, name, anomalous_score=0):
         super(Reviewer, self).__init__(graph, name)
         self.anomalous_score = anomalous_score
@@ -62,9 +68,19 @@ class Product(_Node):
       name: name of this product.
       summary: summary of ratings given to this product.
     """
-    def __init__(self, graph, name):
-        super(Product, self).__init__(graph, name)
-        self.summary = None
+    __slots__ = ()
+
+    @property
+    def summary(self):
+        """Summary of ratings given to this product.
+        """
+        reviewers = self.graph.reviews[self].keys()
+        ratings = [self.graph.reviews[self][r] for r in reviewers]
+        weights = [1 - r.anomalous_score for r in reviewers]
+        if sum(weights) == 0:
+            return np.mean(ratings)
+        else:
+            return np.average(ratings, weights=weights)
 
 
 class ReviewGraph(object):
@@ -74,7 +90,7 @@ class ReviewGraph(object):
       reviewers: collection of reviewers.
       products: collection of products.
       reviews: dictionaly of which key is a product and value is another
-        dictionaly of which key is a product and value is a rating from the
+        dictionaly of which key is a reviewer and value is a rating from the
         reviewer to the product.
     """
 
@@ -122,7 +138,7 @@ class ReviewGraph(object):
         Returns:
           added review score.
         """
-        self.reviews[reviewer][product] = rating
+        self.reviews[product][reviewer] = rating
         return rating
 
     def update(self):
@@ -154,8 +170,8 @@ class ReviewGraph(object):
         Args:
           fp: file-like object where the matrix to be written.
         """
-        for r in self.reviews:
-            i = bisect_left(self.reviewers, r)
-            for p in self.reviews[r]:
-                j = bisect_left(self.products, p)
+        for p in self.reviews:
+            j = bisect_left(self.products, p)
+            for r in self.reviews[p]:
+                i = bisect_left(self.reviewers, r)
                 fp.write("{0} {1}\n".format(i, j))

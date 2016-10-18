@@ -25,6 +25,8 @@ import random
 from StringIO import StringIO
 import unittest
 
+import numpy as np
+
 from fraudar import graph
 
 
@@ -38,6 +40,56 @@ def product_name(j):
     """Returns the j-th product name.
     """
     return "product-{0}".format(j)
+
+
+class TestProduct(unittest.TestCase):
+    """Test case for Product class.
+    """
+    def setUp(self):
+        """Set up for a test.
+        """
+        self.graph = graph.ReviewGraph()
+
+    def test_summary(self):
+        """Test summary property.
+
+        This function creates a graph and makes a sample graph defiend as
+
+        .. graphviz::
+
+           digraph bipartite {
+              graph [rankdir = LR];
+              "reviewer-0";
+              "reviewer-1";
+              "product-0";
+              "product-1";
+              "product-2";
+              "reviewer-0" -> "product-0";
+              "reviewer-0" -> "product-1";
+              "reviewer-0" -> "product-2";
+              "reviewer-1" -> "product-1";
+              "reviewer-1" -> "product-2";
+           }
+
+        """
+        reviewers = [
+            self.graph.new_reviewer(reviewer_name(i)) for i in range(2)
+        ]
+        products = [
+            self.graph.new_product(product_name(i)) for i in range(3)
+        ]
+        for i, r in enumerate(reviewers):
+            for p in products[i:]:
+                self.graph.add_review(r, p, random.random())
+
+        self.assertAlmostEqual(
+            products[2].summary,
+            np.mean(self.graph.reviews[products[2]].values()))
+
+        reviewers[0].anomalous_score = 1
+        self.assertAlmostEqual(
+            products[2].summary,
+            self.graph.reviews[products[2]][reviewers[1]])
 
 
 class TestReviewGraph(unittest.TestCase):
@@ -83,7 +135,7 @@ class TestReviewGraph(unittest.TestCase):
                 self.assertEqual(reviews[r][p], rating)
         for r in reviewers:
             for p in products:
-                self.assertEqual(self.graph.reviews[r][p], reviews[r][p])
+                self.assertEqual(self.graph.reviews[p][r], reviews[r][p])
 
     def test_store_matrix(self):
         """Test store matrix method.
