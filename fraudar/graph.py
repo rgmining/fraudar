@@ -6,6 +6,10 @@ import tempfile
 import numpy as np
 
 from fraudar.export import greedy
+from fraudar.export.greedy import aveDegree
+from fraudar.export.greedy import sqrtWeightedAveDegree
+from fraudar.export.greedy import logWeightedAveDegree
+
 
 class _Node(object):
     """Node of the ReviewGraph.
@@ -86,6 +90,12 @@ class Product(_Node):
 class ReviewGraph(object):
     """ReviewGraph is a simple bipartite graph representing review relation.
 
+    Args:
+      blocks: how many blocks to be detected. (default: 1)
+      algo: algorithm used in fraudar, chosen from
+        :meth:`aveDegree`, :meth:`sqrtWeightedAveDegree`, and
+        :meth:`logWeightedAveDegree`. (default: logWeightedAveDegree)
+
     Attributes:
       reviewers: collection of reviewers.
       products: collection of products.
@@ -94,12 +104,13 @@ class ReviewGraph(object):
         reviewer to the product.
     """
 
-    def __init__(self):
+    def __init__(self, blocks=1, algo=logWeightedAveDegree):
         self.reviewers = []
         self.products = []
         self.reviews = defaultdict(dict)
-        # how many blocks assumed.
-        # detect function
+
+        self.algo = algo
+        self.blocks = blocks
 
     def new_reviewer(self, name, **_kwargs):
         """Create a new reviewer.
@@ -156,11 +167,12 @@ class ReviewGraph(object):
 
             # Run greedy algorithm.
             M = greedy.readData(fp.name)
-            res = greedy.logWeightedAveDegree(M)
+            res = greedy.detectMultiple(M, self.algo, self.blocks)
 
             # Update anomalous scores.
-            for i in res[0][0]:
-                self.reviewers[i].anomalous_score = 1
+            for block in res:
+                for i in block[0][0]:
+                    self.reviewers[i].anomalous_score = 1
 
         return 0
 
