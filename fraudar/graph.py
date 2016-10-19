@@ -1,3 +1,6 @@
+"""Provide a review graph which runs Fraudar algorithm.
+"""
+
 from __future__ import absolute_import
 from bisect import bisect_left
 from collections import defaultdict
@@ -6,8 +9,6 @@ import tempfile
 import numpy as np
 
 from fraudar.export import greedy
-from fraudar.export.greedy import aveDegree
-from fraudar.export.greedy import sqrtWeightedAveDegree
 from fraudar.export.greedy import logWeightedAveDegree
 
 
