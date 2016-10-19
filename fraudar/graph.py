@@ -203,6 +203,8 @@ class ReviewGraph(object):
         Args:
           fp: file-like object where the matrix to be written.
         """
+        self.reviewers.sort()
+        self.products.sort()
         for p in self.reviews:
             j = bisect_left(self.products, p)
             for r in self.reviews[p]:
