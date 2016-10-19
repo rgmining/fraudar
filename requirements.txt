@@ -6,4 +6,5 @@
 #
 numpy==1.11.2
 scikit-learn==0.18        # via sklearn
+scipy==0.18.1
 sklearn==0.0
