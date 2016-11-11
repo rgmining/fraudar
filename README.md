@@ -1,11 +1,22 @@
-# Adapter for FRAUDAR
+# A wrapper of FRAUDAR algorithm
 [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
+[![Build Status](https://travis-ci.org/rgmining/fraudar.svg?branch=master)](https://travis-ci.org/rgmining/fraudar)
+[![wercker status](https://app.wercker.com/status/0187c42cbf06f25156d1cc6bf6ca6ae8/s/master "wercker status")](https://app.wercker.com/project/byKey/0187c42cbf06f25156d1cc6bf6ca6ae8)
+[![Code Climate](https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg)](https://codeclimate.com/github/rgmining/fraudar)
+[![Release](https://img.shields.io/badge/release-0.5.0-brightgreen.svg)](https://github.com/rgmining/fraudar/releases/tag/v0.5.0)
 
-This package implements an adapter for
+This package implements a wrapper of
 [FRAUDAR](https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html)
-so that APIs in
-[Review Graph Mining project](https://rgmining.github.io/)
-access FRAUDAR algorithm.
+algorithm to provide APIs defined in
+[Review Graph Mining project](https://rgmining.github.io/).
+
+
+## Installation
+Use `pip` to install this package.
+
+```
+$pip install --upgrade rgmining-fraudar
+```
 
 
 ## License
