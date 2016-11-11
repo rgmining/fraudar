@@ -23,10 +23,22 @@
 The Fraudar has been introduced by Bryan Hooi, *et al.* in
 ACM SIGKDD 2016 Conference on Knowledge Discovery & Data Mining (KDD 2016).
 
-http://www.kdd.org/kdd2016/subtopic/view/fraudar-bounding-graph-fraud-in-the-face-of-camouflage
+This package exports :class:`ReviewGraph <graph.ReviewGraph>` class,
+which implements interfaces expected in other APIs of
+`Review Graph Mining project <https://rgmining.github.io/>`_,
+and three sub algorithms used in FRAUDER:
 
+* :meth:`aveDegree <export.greedy.aveDegree>` computes average degree on a matrix,
+* :meth:`sqrtWeightedAveDegree <export.greedy.sqrtWeightedAveDegree>`
+  computes square-weighted average degree on a matrix,
+* :meth:`logWeightedAveDegree <export.greedy.logWeightedAveDegree>`
+  computes logarithm-weighted average degree on a matrix.
+
+:meth:`ReviewGraph <graph.ReviewGraph>` takes keyword argument ``algo`` to
+be set the sub algorithm to be used.
 """
-from graph import ReviewGraph
+from __future__ import absolute_import
+from fraudar.graph import ReviewGraph
 from fraudar.export.greedy import aveDegree
 from fraudar.export.greedy import sqrtWeightedAveDegree
 from fraudar.export.greedy import logWeightedAveDegree

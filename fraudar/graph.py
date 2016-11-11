@@ -114,8 +114,11 @@ class ReviewGraph(object):
     Args:
       blocks: how many blocks to be detected. (default: 1)
       algo: algorithm used in fraudar, chosen from
-        :meth:`aveDegree`, :meth:`sqrtWeightedAveDegree`, and
-        :meth:`logWeightedAveDegree`. (default: logWeightedAveDegree)
+        :meth:`aveDegree <fraudar.export.greedy.aveDegree>`,
+        :meth:`sqrtWeightedAveDegree <fraudar.export.greedy.sqrtWeightedAveDegree>`,
+        and
+        :meth:`logWeightedAveDegree <fraudar.export.greedy.logWeightedAveDegree>`.
+        (default: logWeightedAveDegree)
 
     Attributes:
       reviewers: collection of reviewers.
