@@ -1,5 +1,15 @@
 language: python
 python:
   - "2.7"
+addons:
+  apt:
+    packages:
+      - gcc
+      - libblas-dev
+      - liblapack-dev
+      - gfortran
+      - python-numpy
+      - python-scipy
+      - python-sklearn
 script:
   - python setup.py test
