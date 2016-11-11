@@ -38,7 +38,7 @@ def _load_requires_from_file(filepath):
 
 setup(
     name='rgmining-fraudar',
-    version='0.1.0',
+    version='0.5.0',
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="A wrapper of Fraudar algorithm for Review graph mining project",
@@ -48,12 +48,12 @@ setup(
     test_suite='tests.suite',
     license="GPLv3",
     classifiers=[
-            "Development Status :: 3 - Alpha",
-            "Intended Audience :: Science/Research",
-            "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-            "Natural Language :: English",
-            "Programming Language :: Python",
-            "Topic :: Software Development :: Libraries",
-            "Topic :: Scientific/Engineering :: Information Analysis"
-        ]
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Scientific/Engineering :: Information Analysis"
+    ]
 )
