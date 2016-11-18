@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/rgmining/fraudar.svg?branch=master)](https://travis-ci.org/rgmining/fraudar)
 [![wercker status](https://app.wercker.com/status/0187c42cbf06f25156d1cc6bf6ca6ae8/s/master "wercker status")](https://app.wercker.com/project/byKey/0187c42cbf06f25156d1cc6bf6ca6ae8)
 [![Code Climate](https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg)](https://codeclimate.com/github/rgmining/fraudar)
-[![Release](https://img.shields.io/badge/release-0.5.1-brightgreen.svg)](https://github.com/rgmining/fraudar/releases/tag/v0.5.1)
+[![Release](https://img.shields.io/badge/release-0.5.2-brightgreen.svg)](https://github.com/rgmining/fraudar/releases/tag/v0.5.2)
 
 This package implements a wrapper of
 [FRAUDAR](https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html)
