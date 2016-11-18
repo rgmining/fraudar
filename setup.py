@@ -38,7 +38,7 @@ def _load_requires_from_file(filepath):
 
 setup(
     name='rgmining-fraudar',
-    version='0.5.0',
+    version='0.5.1',
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="A wrapper of Fraudar algorithm for Review graph mining project",
