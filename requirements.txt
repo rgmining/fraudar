@@ -5,6 +5,5 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 numpy>=1.11
-scikit-learn>=0.18        # via sklearn
+scikit-learn>=0.18
 scipy>=0.18
-sklearn>=0.0
