@@ -162,7 +162,7 @@ class ReviewGraph(object):
         self.products.append(p)
         return p
 
-    def add_review(self, reviewer, product, rating):
+    def add_review(self, reviewer, product, rating, _time=None):
         """Add a review from a reviewer to a product.
 
         Args:
