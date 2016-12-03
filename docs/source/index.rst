@@ -1,3 +1,6 @@
+:description: This package implements a wrapper of FRAUDAR algorithm to provide
+  APIs defined in `Review Graph Mining project`_.
+
 .. _top:
 
 A wrapper of FRAUDAR algorithm
