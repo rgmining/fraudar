@@ -7,7 +7,9 @@ build:
           git submodule update --init
     - jkawamoto/sphinx:
         basedir: docs
-        packages: sphinx-autobuild sphinxcontrib-napoleon -e git+https://github.com/snide/sphinx_rtd_theme#egg=sphinx_rtd_theme-master -e git+https://github.com/jkawamoto/sphinx@multiline-docinfo#egg=sphinx-multiline-docinfo
+        packages: sphinx-autobuild sphinxcontrib-napoleon -e git+https://github.com/snide/sphinx_rtd_theme#egg=sphinx_rtd_theme-master
+    - samueldebruyn/minify:
+        base_dir: docs/build/html
 deploy:
   steps:
     - jkawamoto/ghp-import:
