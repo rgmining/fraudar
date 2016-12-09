@@ -11,5 +11,7 @@ addons:
       - python-numpy
       - python-scipy
       - python-sklearn
+install:
+  - pip install --upgrade pip
 script:
   - python setup.py test
