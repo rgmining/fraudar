@@ -7,6 +7,8 @@ addons:
       - gcc
       - libblas-dev
       - liblapack-dev
+      - libatlas-dev
+      - libatlas3gf-base
       - gfortran
       - python-numpy
       - python-scipy
