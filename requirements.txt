@@ -4,6 +4,6 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-numpy>=1.11.2
-scikit-learn>=0.18.1
-scipy>=0.18.1
+numpy>=1.9.1
+scikit-learn>=0.17
+scipy>=0.17
