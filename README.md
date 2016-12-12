@@ -23,7 +23,7 @@ $pip install --upgrade rgmining-fraudar
 This software is released under The GNU General Public License Version 3,
 see [COPYING](COPYING) for more detail.
 
-The original FRAUDAR source code, which is in `fraudar/export`, are made by
+The original FRAUDAR source code is made by
 [Bryan Hooi](https://www.andrew.cmu.edu/user/bhooi/index.html),
 [Hyun Ah Song](http://www.cs.cmu.edu/~hyunahs/),
 [Alex Beutel](http://alexbeutel.com/),
@@ -31,3 +31,4 @@ The original FRAUDAR source code, which is in `fraudar/export`, are made by
 [Kijung Shin](http://www.cs.cmu.edu/~kijungs/), and
 [Christos Faloutsos](http://www.cs.cmu.edu/~christos/),
 and licensed under [Apache License, Version 2.0](LICENSE-2.0).
+It is available at https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html.

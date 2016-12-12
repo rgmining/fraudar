@@ -1,3 +1,27 @@
+#
+# greedy.py
+#
+# Copyright (c) 2016 Junpei Kawamoto
+#
+# This file is part of rgmining-fraudar.
+#
+# rgmining-fraudar is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rgmining-fraudar is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+#
+# This file was originally made by Bryan Hooi et al,
+# and distributed under Apache License, Version 2.0.
+#
+
 # FRAUDAR: Bounding Graph Fraud in the Face of Camouflage
 # Authors: Bryan Hooi, Hyun Ah Song, Alex Beutel, Neil Shah, Kijung Shin, Christos Faloutsos
 #
@@ -16,50 +40,47 @@
 # Version: 1.0
 # Date: Oct 3, 2016
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
-
-
-# contains functions that run the greedy detector for dense regions in a sparse matrix.
-# use aveDegree or sqrtWeightedAveDegree or logWeightedAveDegree on a sparse matrix,
-# which returns ((rowSet, colSet), score) for the most suspicious block.
+"""contains functions that run the greedy detector for dense regions in a sparse matrix.
+use aveDegree or sqrtWeightedAveDegree or logWeightedAveDegree on a sparse matrix,
+which returns ((rowSet, colSet), score) for the most suspicious block.
+"""
 
 from __future__ import division
-import json
-import time
-import math
-import os
 import numpy as np
 import random
-# import matplotlib.pyplot as plt
-from collections import namedtuple
-from collections import OrderedDict
-from operator import itemgetter
-# from sklearn.decomposition import TruncatedSVD
 from scipy import sparse
 from sklearn.utils import shuffle
 from MinTree import MinTree
-import cPickle as pickle
+
+from logging import getLogger
+logger = getLogger(__name__)
+
 np.set_printoptions(threshold='nan')
 np.set_printoptions(linewidth=160)
 
-# given a list of lists where each row is an edge, this returns the sparse matrix representation of the data.
 # @profile
 def listToSparseMatrix(edgesSource, edgesDest):
+    """given a list of lists where each row is an edge, this returns the sparse matrix representation of the data.
+    """
     m = max(edgesSource) + 1
     n = max(edgesDest) + 1
     M = sparse.coo_matrix(([1]*len(edgesSource), (edgesSource, edgesDest)), shape=(m, n))
     M1 = M > 0
     return M1.astype('int')
 
-# randomly shuffle the rows and columns
 def shuffleMatrix(M):
+    """randomly shuffle the rows and columns.
+    """
     M = shuffle(M)
     return shuffle(M.transpose()).transpose()
 
 
-# reads matrix from file and returns sparse matrix. first 2 columns should be row and column indices
-# of ones.
 # @profile
 def readData(filename):
+    """reads matrix from file and returns sparse matrix.
+
+    first 2 columns should be row and column indices of ones.
+    """
     # dat = np.genfromtxt(filename, delimiter='\t', dtype=int)
     edgesSource = []
     edgesDest = []
@@ -84,7 +105,7 @@ def detectMultiple(M, detectFunc, numToDetect):
     return res
 
 def injectCliqueCamo(M, m0, n0, p, testIdx):
-    (m,n) = M.shape
+    _, n = M.shape
     M2 = M.copy().tolil()
 
     colSum = np.squeeze(M2.sum(axis = 0).A)
@@ -153,6 +174,7 @@ def getRowFMeasure(pred, actual, idx):
     return 0 if (prec + rec == 0) else (2 * prec * rec / (prec + rec))
 
 def sqrtWeightedAveDegree(M):
+    _, n = M.shape
     colSums = M.sum(axis=0)
     colWeights = 1.0 / np.sqrt(np.squeeze(colSums.A) + 5)
     colDiag = sparse.lil_matrix((n, n))
@@ -161,16 +183,17 @@ def sqrtWeightedAveDegree(M):
     return fastGreedyDecreasing(W, colWeights)
 
 def logWeightedAveDegree(M):
-    (m, n) = M.shape
+    (_, n) = M.shape
     colSums = M.sum(axis=0)
     colWeights = 1.0 / np.log(np.squeeze(colSums.A) + 5)
     colDiag = sparse.lil_matrix((n, n))
     colDiag.setdiag(colWeights)
     W = M * colDiag
-    print "finished computing weight matrix"
+    logger.info("finished computing weight matrix")
     return fastGreedyDecreasing(W, colWeights)
 
 def aveDegree(M):
+    _, n = M.shape
     return fastGreedyDecreasing(M, [1] * n)
 
 def subsetAboveDegree(M, col_thres, row_thres):
@@ -190,21 +213,19 @@ def subsetAboveDegree(M, col_thres, row_thres):
 # @profile
 def fastGreedyDecreasing(M, colWeights):
     (m, n) = M.shape
-    Md = M.todok()
     Ml = M.tolil()
     Mlt = M.transpose().tolil()
     rowSet = set(range(0, m))
     colSet = set(range(0, n))
     curScore = c2Score(M, rowSet, colSet)
     bestAveScore = curScore / (len(rowSet) + len(colSet))
-    bestSets = (rowSet, colSet)
-    print "finished setting up greedy"
+    logger.info("finished setting up greedy")
     rowDeltas = np.squeeze(M.sum(axis=1).A) # *decrease* in total weight when *removing* this row
     colDeltas = np.squeeze(M.sum(axis=0).A)
-    print "finished setting deltas"
+    logger.info("finished setting deltas")
     rowTree = MinTree(rowDeltas)
     colTree = MinTree(colDeltas)
-    print "finished building min trees"
+    logger.info("finished building min trees")
 
     numDeleted = 0
     deleted = []
@@ -212,13 +233,12 @@ def fastGreedyDecreasing(M, colWeights):
 
     while rowSet and colSet:
         if (len(colSet) + len(rowSet)) % 100000 == 0:
-            print "current set size = ", len(colSet) + len(rowSet)
+            logger.info("current set size = %d", len(colSet) + len(rowSet))
         (nextRow, rowDelt) = rowTree.getMin()
         (nextCol, colDelt) = colTree.getMin()
         if rowDelt <= colDelt:
             curScore -= rowDelt
             for j in Ml.rows[nextRow]:
-                delt = colWeights[j]
                 colTree.changeVal(j, -colWeights[j])
             rowSet -= {nextRow}
             rowTree.changeVal(nextRow, float('inf'))
@@ -226,7 +246,6 @@ def fastGreedyDecreasing(M, colWeights):
         else:
             curScore -= colDelt
             for i in Mlt.rows[nextCol]:
-                delt = colWeights[nextCol]
                 rowTree.changeVal(i, -colWeights[nextCol])
             colSet -= {nextCol}
             colTree.changeVal(nextCol, float('inf'))

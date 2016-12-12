@@ -1,3 +1,27 @@
+#
+# MainTree.py
+#
+# Copyright (c) 2016 Junpei Kawamoto
+#
+# This file is part of rgmining-fraudar.
+#
+# rgmining-fraudar is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rgmining-fraudar is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+#
+# This file was originally made by Bryan Hooi et al,
+# and distributed under Apache License, Version 2.0.
+#
+
 # FRAUDAR: Bounding Graph Fraud in the Face of Camouflage
 # Authors: Bryan Hooi, Hyun Ah Song, Alex Beutel, Neil Shah, Kijung Shin, Christos Faloutsos
 #
@@ -17,12 +41,15 @@
 # Date: Oct 3, 2016
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
 
-
-# A tree data structure which stores a list of degrees and can quickly retrieve the min degree element,
-# or modify any of the degrees, each in logarithmic time. It works by creating a binary tree with the
-# given elements in the leaves, where each internal node stores the min of its two children.
+from __future__ import division, print_function
 import math
+import sys
+
 class MinTree:
+    """A tree data structure which stores a list of degrees and can quickly retrieve the min degree element,
+    or modify any of the degrees, each in logarithmic time. It works by creating a binary tree with the
+    given elements in the leaves, where each internal node stores the min of its two children.
+    """
     def __init__(self, degrees):
         self.height = int(math.ceil(math.log(len(degrees), 2)))
         self.numLeaves = 2 ** self.height
@@ -37,7 +64,7 @@ class MinTree:
     # @profile
     def getMin(self):
         cur = 0
-        for i in range(self.height):
+        for _ in range(self.height):
             cur = (2 * cur + 1) if self.nodes[2 * cur + 1] <= self.nodes[2 * cur + 2] else (2 * cur + 2)
         # print "found min at %d: %d" % (cur, self.nodes[cur])
         return (cur - self.numBranches, self.nodes[cur])
@@ -46,18 +73,18 @@ class MinTree:
     def changeVal(self, idx, delta):
         cur = self.numBranches + idx
         self.nodes[cur] += delta
-        for i in range(self.height):
+        for _ in range(self.height):
             cur = (cur - 1) // 2
             nextParent = min(self.nodes[2 * cur + 1], self.nodes[2 * cur + 2])
             if self.nodes[cur] == nextParent:
                 break
             self.nodes[cur] = nextParent
 
-    def dump(self):
-        print "numLeaves: %d, numBranches: %d, n: %d, nodes: " % (self.numLeaves, self.numBranches, self.n)
+    def dump(self, output=sys.stdout):
+        print("numLeaves: %d, numBranches: %d, n: %d, nodes: " % (self.numLeaves, self.numBranches, self.n), file=output)
         cur = 0
         for i in range(self.height + 1):
-            for j in range(2 ** i):
-                print self.nodes[cur],
+            for _ in range(2 ** i):
+                print(self.nodes[cur], end="", file=output)
                 cur += 1
-            print ''
+            print('', file=output)
