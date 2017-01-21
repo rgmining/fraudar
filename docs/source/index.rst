@@ -181,7 +181,7 @@ Script
 ^^^^^^^
 As the summary of the above usage, we make an executable script which takes
 the parameter `n` as a command line option, and analyze the above graph.
-We save the following script as `analyze.py`.
+Let us save the following script as `analyze.py`.
 
 .. code-block:: python
 
@@ -224,10 +224,10 @@ We save the following script as `analyze.py`.
       analyze()
 
 Note that, the above script uses `click <http://click.pocoo.org/>`_.
-If you didn't install it, run `pip install click`.
+If you didn't install it, you need to run `pip install click`.
 
 Then, you can analyze the graph with a specific :math:`n`, for example 5,
-run
+run the script by
 
 .. code-block:: bash
 
