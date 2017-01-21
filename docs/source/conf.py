@@ -61,7 +61,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Wrapper of FRAUDAR algorithm'
-copyright = u'2016, Junpei Kawamoto'
+copyright = u'2016-2017, Junpei Kawamoto'
 author = u'Junpei Kawamoto'
 
 # The version info for the project you're documenting, acts as replacement for
