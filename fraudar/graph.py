@@ -67,13 +67,16 @@ class _Node(object):
 class Reviewer(_Node):
     """A node type representing a reviewer.
 
+    Use :meth:`ReviewGraph.new_reviewer` to create a new reviewer object
+    instead of using this constructor directory.
+
     Args:
       graph: graph object this reviewer belongs to.
       name: name of this reviewer.
 
     Attributes:
       name: name of this reviewer.
-      anomalous_score: anomalous score.
+      anomalous_score: anomalous score of this reviewer.
     """
     __slots__ = ("anomalous_score",)
 
@@ -84,6 +87,9 @@ class Reviewer(_Node):
 
 class Product(_Node):
     """A node type representing a product.
+
+    Use :meth:`ReviewGraph.new_product` to create a new product object
+    instead of using this constructor directory.
 
     Args:
       graph: graph object this product belongs to.

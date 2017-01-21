@@ -39,6 +39,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.graphviz',
     "sphinx.ext.napoleon"
 ]
 
@@ -364,4 +365,8 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    "project": ("https://rgmining.github.io", None),
+    "dataset-io": ("https://rgmining.github.io/dataset-io", None),
+    'python': ('https://docs.python.org/3.4', None),
+}
