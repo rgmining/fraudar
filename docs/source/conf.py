@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: skip-file
 #
-# Review Graph Mining Common Library documentation build configuration file, created by
-# sphinx-quickstart on Sun Oct  2 00:54:40 2016.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #

@@ -27,7 +27,7 @@ License
 
 | This software is released under The GNU General Public License Version
   3,
-| see `COPYING <COPYING>`__ for more detail.
+| see `COPYING <https://github.com/rgmining/fraudar/blob/master/COPYING>`__ for more detail.
 
 | The original FRAUDAR source code is made by
 | `Bryan Hooi <https://www.andrew.cmu.edu/user/bhooi/index.html>`__,

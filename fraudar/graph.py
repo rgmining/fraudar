@@ -1,7 +1,7 @@
 #
 # graph.py
 #
-# Copyright (c) 2016 Junpei Kawamoto
+# Copyright (c) 2016-2017 Junpei Kawamoto
 #
 # This file is part of rgmining-fraudar.
 #
@@ -16,7 +16,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
 """Provide a review graph which runs Fraudar algorithm.
 """
