@@ -1,7 +1,7 @@
 #
 # setup.py
 #
-# Copyright (c) 2016 Junpei Kawamoto
+# Copyright (c) 2016-2017 Junpei Kawamoto
 #
 # This file is part of rgmining-fraudar.
 #
@@ -16,14 +16,21 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
 """Package information about a wrapper of Fraudar algorithm.
 """
+from os import path
 from setuptools import setup, find_packages
 
 
-def _load_requires_from_file(filepath):
+def read(fname):
+    """Read a file.
+    """
+    return open(path.join(path.dirname(__file__), fname)).read()
+
+
+def load_requires_from_file(filepath):
     """Read a package list from a given file path.
 
     Args:
@@ -38,17 +45,21 @@ def _load_requires_from_file(filepath):
 
 setup(
     name='rgmining-fraudar',
-    version='0.6.0',
+    use_scm_version=True,
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="A wrapper of Fraudar algorithm for Review graph mining project",
+    long_description=read("README.rst"),
     url="https://github.com/rgmining/fraudar",
     packages=find_packages(exclude=["tests"]),
-    install_requires=_load_requires_from_file("requirements.txt"),
+    setup_requires=[
+        "setuptools_scm"
+    ],
+    install_requires=load_requires_from_file("requirements.txt"),
     test_suite='tests.suite',
     license="GPLv3",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Natural Language :: English",

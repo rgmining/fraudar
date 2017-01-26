@@ -4,6 +4,8 @@
 [![Code Climate](https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg)](https://codeclimate.com/github/rgmining/fraudar)
 [![Release](https://img.shields.io/badge/release-0.6.0-brightgreen.svg)](https://github.com/rgmining/fraudar/releases/tag/v0.6.0)
 
+[![Logo](https://rgmining.github.io/fraudar/_static/image.png)](https://rgmining.github.io/fraudar/)
+
 This package implements a wrapper of
 [FRAUDAR](https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html)
 algorithm to provide APIs defined in
