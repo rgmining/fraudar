@@ -1,5 +1,6 @@
 # A wrapper of FRAUDAR algorithm
 [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
+[![Build Status](https://travis-ci.org/rgmining/fraudar.svg?branch=master)](https://travis-ci.org/rgmining/fraudar)
 [![wercker status](https://app.wercker.com/status/0187c42cbf06f25156d1cc6bf6ca6ae8/s/master "wercker status")](https://app.wercker.com/project/byKey/0187c42cbf06f25156d1cc6bf6ca6ae8)
 [![Code Climate](https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg)](https://codeclimate.com/github/rgmining/fraudar)
 [![Release](https://img.shields.io/badge/release-0.6.0-brightgreen.svg)](https://github.com/rgmining/fraudar/releases/tag/v0.6.0)
