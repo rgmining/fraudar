@@ -20,6 +20,7 @@
 #
 """Package information about a wrapper of Fraudar algorithm.
 """
+# pylint: disable=invalid-name
 from os import path
 from setuptools import setup, find_packages
 

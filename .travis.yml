@@ -1,6 +1,7 @@
 language: python
 python:
-- '2.7'
+- 2.7
+- 3.6
 addons:
   apt:
     packages:
@@ -12,6 +13,8 @@ addons:
     - python-numpy
     - python-scipy
     - python-sklearn
+before_install:
+- pip install -U scipy
 script:
 - python setup.py test
 deploy:

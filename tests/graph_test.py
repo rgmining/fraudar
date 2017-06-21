@@ -1,7 +1,7 @@
 #
 # graph_test.py
 #
-# Copyright (c) 2016 Junpei Kawamoto
+# Copyright (c) 2016-2017 Junpei Kawamoto
 #
 # This file is part of rgmining-fraudar.
 #

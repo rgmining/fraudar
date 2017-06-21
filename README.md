@@ -15,7 +15,7 @@ algorithm to provide APIs defined in
 ## Installation
 Use `pip` to install this package.
 
-```
+```shell
 $pip install --upgrade rgmining-fraudar
 ```
 
