@@ -1,6 +1,6 @@
 language: python
 python:
-- 2.7
+- 2.7.13
 - 3.6
 addons:
   apt:
@@ -14,7 +14,7 @@ addons:
     - python-scipy
     - python-sklearn
 before_install:
-- pip install -U scipy --verbose
+- pip install -U pip scipy -v -v -v
 script:
 - python setup.py test
 deploy:
