@@ -14,7 +14,7 @@ addons:
     - python-scipy
     - python-sklearn
 before_install:
-- pip install -U scipy
+- pip install -U scipy --verbose
 script:
 - python setup.py test
 deploy:
