@@ -45,7 +45,7 @@ https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html.
    :target: https://app.wercker.com/project/byKey/0187c42cbf06f25156d1cc6bf6ca6ae8
 .. |Code Climate| image:: https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg
    :target: https://codeclimate.com/github/rgmining/fraudar
-.. |Release| image:: https://img.shields.io/badge/release-0.6.0-brightgreen.svg
-   :target: https://github.com/rgmining/fraudar/releases/tag/v0.6.0
+.. |Release| image:: https://img.shields.io/badge/release-0.6.1-brightgreen.svg
+   :target: https://github.com/rgmining/fraudar/releases/tag/v0.6.1
 .. |Logo| image:: https://rgmining.github.io/fraudar/_static/image.png
    :target: https://rgmining.github.io/fraudar/
