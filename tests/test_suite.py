@@ -20,7 +20,7 @@
 #
 """Test suite.
 """
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 import importlib
 import sys
 import unittest
@@ -53,7 +53,7 @@ def main():
     try:
         res = unittest.TextTestRunner(verbosity=2).run(suite())
     except KeyboardInterrupt:
-        print "Test canceled."
+        print("Test canceled.")
         return -1
     else:
         return 0 if res.wasSuccessful() else 1

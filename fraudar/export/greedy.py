@@ -50,7 +50,7 @@ import numpy as np
 import random
 from scipy import sparse
 from sklearn.utils import shuffle
-from MinTree import MinTree
+from fraudar.export.MinTree import MinTree
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -59,14 +59,18 @@ np.set_printoptions(threshold='nan')
 np.set_printoptions(linewidth=160)
 
 # @profile
+
+
 def listToSparseMatrix(edgesSource, edgesDest):
     """given a list of lists where each row is an edge, this returns the sparse matrix representation of the data.
     """
     m = max(edgesSource) + 1
     n = max(edgesDest) + 1
-    M = sparse.coo_matrix(([1]*len(edgesSource), (edgesSource, edgesDest)), shape=(m, n))
+    M = sparse.coo_matrix(
+        ([1] * len(edgesSource), (edgesSource, edgesDest)), shape=(m, n))
     M1 = M > 0
     return M1.astype('int')
+
 
 def shuffleMatrix(M):
     """randomly shuffle the rows and columns.
@@ -104,74 +108,89 @@ def detectMultiple(M, detectFunc, numToDetect):
                 Mcur[rs[i], cs[i]] = 0
     return res
 
+
 def injectCliqueCamo(M, m0, n0, p, testIdx):
     _, n = M.shape
     M2 = M.copy().tolil()
 
-    colSum = np.squeeze(M2.sum(axis = 0).A)
+    colSum = np.squeeze(M2.sum(axis=0).A)
     colSumPart = colSum[n0:n]
     colSumPartPro = np.int_(colSumPart)
     colIdx = np.arange(n0, n, 1)
-    population = np.repeat(colIdx, colSumPartPro, axis = 0)
+    population = np.repeat(colIdx, colSumPartPro, axis=0)
 
     for i in range(m0):
         # inject clique
         for j in range(n0):
             if random.random() < p:
-                M2[i,j] = 1
+                M2[i, j] = 1
         # inject camo
         if testIdx == 1:
             thres = p * n0 / (n - n0)
             for j in range(n0, n):
                 if random.random() < thres:
-                    M2[i,j] = 1
+                    M2[i, j] = 1
         if testIdx == 2:
             thres = 2 * p * n0 / (n - n0)
             for j in range(n0, n):
                 if random.random() < thres:
-                    M2[i,j] = 1
+                    M2[i, j] = 1
         # biased camo
         if testIdx == 3:
             colRplmt = random.sample(population, int(n0 * p))
-            M2[i,colRplmt] = 1
+            M2[i, colRplmt] = 1
 
     return M2.tocsc()
 
-# compute score as sum of 1- and 2- term interactions (currently just sum of matrix entries)
+# compute score as sum of 1- and 2- term interactions (currently just sum
+# of matrix entries)
+
+
 def c2Score(M, rowSet, colSet):
-    return M[list(rowSet),:][:,list(colSet)].sum(axis=None)
+    return M[list(rowSet), :][:, list(colSet)].sum(axis=None)
 
 
 def jaccard(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
-    unionSize = len(set.union(pred[0], actual[0])) + len(set.union(pred[1], actual[1]))
+    intersectSize = len(set.intersection(
+        pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
+    unionSize = len(set.union(pred[0], actual[0])) + \
+        len(set.union(pred[1], actual[1]))
     return intersectSize / unionSize
 
+
 def getPrecision(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
+    intersectSize = len(set.intersection(
+        pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
     return intersectSize / (len(pred[0]) + len(pred[1]))
 
+
 def getRecall(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
+    intersectSize = len(set.intersection(
+        pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
     return intersectSize / (len(actual[0]) + len(actual[1]))
+
 
 def getFMeasure(pred, actual):
     prec = getPrecision(pred, actual)
     rec = getRecall(pred, actual)
     return 0 if (prec + rec == 0) else (2 * prec * rec / (prec + rec))
 
+
 def getRowPrecision(pred, actual, idx):
     intersectSize = len(set.intersection(pred[idx], actual[idx]))
     return intersectSize / len(pred[idx])
+
 
 def getRowRecall(pred, actual, idx):
     intersectSize = len(set.intersection(pred[idx], actual[idx]))
     return intersectSize / len(actual[idx])
 
+
 def getRowFMeasure(pred, actual, idx):
     prec = getRowPrecision(pred, actual, idx)
     rec = getRowRecall(pred, actual, idx)
     return 0 if (prec + rec == 0) else (2 * prec * rec / (prec + rec))
+
 
 def sqrtWeightedAveDegree(M):
     _, n = M.shape
@@ -181,6 +200,7 @@ def sqrtWeightedAveDegree(M):
     colDiag.setdiag(colWeights)
     W = M * colDiag
     return fastGreedyDecreasing(W, colWeights)
+
 
 def logWeightedAveDegree(M):
     (_, n) = M.shape
@@ -192,9 +212,11 @@ def logWeightedAveDegree(M):
     logger.info("finished computing weight matrix")
     return fastGreedyDecreasing(W, colWeights)
 
+
 def aveDegree(M):
     _, n = M.shape
     return fastGreedyDecreasing(M, [1] * n)
+
 
 def subsetAboveDegree(M, col_thres, row_thres):
     M = M.tocsc()
@@ -220,7 +242,8 @@ def fastGreedyDecreasing(M, colWeights):
     curScore = c2Score(M, rowSet, colSet)
     bestAveScore = curScore / (len(rowSet) + len(colSet))
     logger.info("finished setting up greedy")
-    rowDeltas = np.squeeze(M.sum(axis=1).A) # *decrease* in total weight when *removing* this row
+    # *decrease* in total weight when *removing* this row
+    rowDeltas = np.squeeze(M.sum(axis=1).A)
     colDeltas = np.squeeze(M.sum(axis=0).A)
     logger.info("finished setting deltas")
     rowTree = MinTree(rowDeltas)

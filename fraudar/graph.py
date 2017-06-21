@@ -63,6 +63,9 @@ class _Node(object):
         """
         return 13 * hash(type(self)) + 17 * hash(self.name)
 
+    def __lt__(self, other):
+        return self.name.__lt__(other.name)
+
 
 class Reviewer(_Node):
     """A node type representing a reviewer.
@@ -189,7 +192,7 @@ class ReviewGraph(object):
           0
         """
 
-        with tempfile.NamedTemporaryFile() as fp:
+        with tempfile.NamedTemporaryFile(mode="w") as fp:
 
             # Store this graph to a tempfile.
             self._store_matrix(fp)

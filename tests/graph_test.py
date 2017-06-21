@@ -22,7 +22,10 @@
 """
 from collections import defaultdict
 import random
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import unittest
 
 import numpy as np
@@ -45,6 +48,7 @@ def product_name(j):
 class TestProduct(unittest.TestCase):
     """Test case for Product class.
     """
+
     def setUp(self):
         """Set up for a test.
         """
@@ -84,7 +88,7 @@ class TestProduct(unittest.TestCase):
 
         self.assertAlmostEqual(
             products[2].summary,
-            np.mean(self.graph.reviews[products[2]].values()))
+            np.mean(list(self.graph.reviews[products[2]].values())))
 
         reviewers[0].anomalous_score = 1
         self.assertAlmostEqual(
