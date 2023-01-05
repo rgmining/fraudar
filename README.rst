@@ -6,7 +6,7 @@ A wrapper of FRAUDAR algorithm
 |Logo|
 
 This package implements a wrapper of
-`FRAUDAR <https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html>`__
+`FRAUDAR <https://bhooi.github.io/projects/fraudar/index.html>`__
 algorithm to provide APIs defined in `Review Graph Mining
 project <https://rgmining.github.io/>`__.
 
@@ -35,7 +35,7 @@ Shah <http://www.cs.cmu.edu/~neilshah/>`__, `Kijung
 Shin <http://www.cs.cmu.edu/~kijungs/>`__, and `Christos
 Faloutsos <http://www.cs.cmu.edu/~christos/>`__, and licensed under
 `Apache License, Version 2.0 <LICENSE-2.0>`__. It is available at
-https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html.
+https://bhooi.github.io/projects/fraudar/index.html.
 
 .. |GPLv3| image:: https://img.shields.io/badge/license-GPLv3-blue.svg
    :target: https://www.gnu.org/copyleft/gpl.html
