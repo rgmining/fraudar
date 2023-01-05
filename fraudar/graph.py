@@ -1,30 +1,29 @@
 #
-# graph.py
+#  graph.py
 #
-# Copyright (c) 2016-2017 Junpei Kawamoto
+#  Copyright (c) 2016-2023 Junpei Kawamoto
 #
-# This file is part of rgmining-fraudar.
+#  This file is part of rgmining-fraudar.
 #
-# rgmining-fraudar is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#  rgmining-fraudar is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
 #
-# rgmining-fraudar is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+#  rgmining-fraudar is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU General Public License
+#  along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
 """Provide a review graph which runs Fraudar algorithm.
 """
-
-from __future__ import absolute_import
+import tempfile
 from bisect import bisect_left
 from collections import defaultdict
-import tempfile
+from typing import Any, Final, Protocol
 
 import numpy as np
 
@@ -32,7 +31,7 @@ from fraudar.export import greedy
 from fraudar.export.greedy import logWeightedAveDegree
 
 
-class _Node(object):
+class _Node:
     """Node of the ReviewGraph.
 
     A node has a name and a link to the graph. It also implements __hash__
@@ -46,9 +45,13 @@ class _Node(object):
       graph: graph object this node belongs to.
       name: name of this node.
     """
+
+    graph: Final["ReviewGraph"]
+    name: Final[str]
+
     __slots__ = ("graph", "name")
 
-    def __init__(self, graph, name):
+    def __init__(self, graph: "ReviewGraph", name: str) -> None:
         """Construct a node instance.
 
         Args:
@@ -58,12 +61,11 @@ class _Node(object):
         self.graph = graph
         self.name = name
 
-    def __hash__(self):
-        """Returns a hash value of this instance.
-        """
+    def __hash__(self) -> int:
+        """Returns a hash value of this instance."""
         return 13 * hash(type(self)) + 17 * hash(self.name)
 
-    def __lt__(self, other):
+    def __lt__(self, other: "_Node") -> bool:
         return self.name.__lt__(other.name)
 
 
@@ -81,10 +83,13 @@ class Reviewer(_Node):
       name: name of this reviewer.
       anomalous_score: anomalous score of this reviewer.
     """
+
+    anomalous_score: float
+
     __slots__ = ("anomalous_score",)
 
-    def __init__(self, graph, name, anomalous_score=0):
-        super(Reviewer, self).__init__(graph, name)
+    def __init__(self, graph: "ReviewGraph", name: str, anomalous_score: float = 0) -> None:
+        super().__init__(graph, name)
         self.anomalous_score = anomalous_score
 
 
@@ -100,24 +105,31 @@ class Product(_Node):
 
     Attributes:
       name: name of this product.
+
+    Properties:
       summary: summary of ratings given to this product.
     """
+
     __slots__ = ()
 
     @property
-    def summary(self):
-        """Summary of ratings given to this product.
-        """
+    def summary(self) -> float:
+        """Summary of ratings given to this product."""
         reviewers = self.graph.reviews[self].keys()
         ratings = [self.graph.reviews[self][r] for r in reviewers]
         weights = [1 - r.anomalous_score for r in reviewers]
         if sum(weights) == 0:
-            return np.mean(ratings)
+            return float(np.mean(ratings))
         else:
-            return np.average(ratings, weights=weights)
+            return float(np.average(ratings, weights=weights))
 
 
-class ReviewGraph(object):
+class Writable(Protocol):
+    def write(self, s: str, /) -> int:
+        ...
+
+
+class ReviewGraph:
     """ReviewGraph is a simple bipartite graph representing review relation.
 
     Args:
@@ -132,12 +144,18 @@ class ReviewGraph(object):
     Attributes:
       reviewers: collection of reviewers.
       products: collection of products.
-      reviews: dictionaly of which key is a product and value is another
-        dictionaly of which key is a reviewer and value is a rating from the
+      reviews: dictionary of which key is a product and value is another
+        dictionary of which key is a reviewer and value is a rating from the
         reviewer to the product.
     """
 
-    def __init__(self, blocks=1, algo=logWeightedAveDegree):
+    reviewers: Final[list[Reviewer]]
+    products: Final[list[Product]]
+    reviews: Final[defaultdict[Product, dict[Reviewer, float]]]
+    algo: Final[Any]
+    blocks: Final[int]
+
+    def __init__(self, blocks: int = 1, algo: Any = logWeightedAveDegree) -> None:
         self.reviewers = []
         self.products = []
         self.reviews = defaultdict(dict)
@@ -145,7 +163,7 @@ class ReviewGraph(object):
         self.algo = algo
         self.blocks = blocks
 
-    def new_reviewer(self, name, **_kwargs):
+    def new_reviewer(self, name: str, **_kwargs: Any) -> Reviewer:
         """Create a new reviewer.
 
         Args:
@@ -158,7 +176,7 @@ class ReviewGraph(object):
         self.reviewers.append(r)
         return r
 
-    def new_product(self, name):
+    def new_product(self, name: str) -> Product:
         """Create a new product.
 
         Args:
@@ -171,7 +189,7 @@ class ReviewGraph(object):
         self.products.append(p)
         return p
 
-    def add_review(self, reviewer, product, rating, _time=None):
+    def add_review(self, reviewer: Reviewer, product: Product, rating: float, **_kwargs: Any) -> float:
         """Add a review from a reviewer to a product.
 
         Args:
@@ -185,16 +203,14 @@ class ReviewGraph(object):
         self.reviews[product][reviewer] = rating
         return rating
 
-    def update(self):
+    def update(self) -> float:
         """Update anomalous scores by running a greedy algorithm.
 
         Returns:
           0
         """
-
         with tempfile.NamedTemporaryFile(mode="w") as fp:
-
-            # Store this graph to a tempfile.
+            # Store this graph to a temporal file.
             self._store_matrix(fp)
             fp.seek(0)
 
@@ -209,7 +225,7 @@ class ReviewGraph(object):
 
         return 0
 
-    def _store_matrix(self, fp):
+    def _store_matrix(self, fp: Writable) -> None:
         """Store this graph as a sparse matrix format.
 
         Args:
