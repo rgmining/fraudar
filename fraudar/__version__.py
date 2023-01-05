@@ -1,5 +1,5 @@
 #
-#  __init__.py
+#  __version__.py
 #
 #  Copyright (c) 2016-2023 Junpei Kawamoto
 #
@@ -18,5 +18,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
-"""Provide unit tests for fraudar package.
-"""
+from typing import Final
+
+__version__: Final = "0.6.1"

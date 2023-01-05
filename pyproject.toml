@@ -1,0 +1,73 @@
+[tool.poetry]
+name = "rgmining-fraudar"
+version = "0.6.1"
+description = "A wrapper of Fraudar algorithm for Review graph mining project"
+license = "GPL-3.0-only"
+authors = ["Junpei Kawamoto <kawamoto.junpei@gmail.com>"]
+readme = "README.rst"
+homepage = "https://rgmining.github.io/fraudar/"
+repository = "https://github.com/rgmining/fraudar"
+documentation = "https://rgmining.github.io/fraudar/"
+keywords = ["review", "graph", "mining", "algorithm", "kdd", "fraudar"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+packages = [
+    { include = "fraudar" },
+]
+include = ["COPYING", "LICENSE-2.0"]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.24.1"
+scikit-learn = "^1.2.0"
+
+
+[tool.poetry.dev-dependencies]
+bump2version = "^1.0.1"
+pre-commit = "^2.17.0"
+isort = "^5.10.1"
+flake8 = "^6.0.0"
+black = "^22.1.0"
+pytest = "^7.1.1"
+mypy = "^0.991"
+pytest-cov = "^4.0.0"
+pytest-mock = "^3.7.0"
+tox = "^4.2.3"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+target-version = ['py39']
+line-length = 120
+
+
+[tool.isort]
+profile = "black"
+line_length = 120
+src_paths = ["fraudar", "tests"]
+
+
+[tool.mypy]
+files = "fraudar/*.py,tests/**/*.py"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+
+[tool.pytest.ini_options]
+addopts = "--cov='fraudar' --cov-branch"
