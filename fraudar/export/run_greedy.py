@@ -13,39 +13,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Version: 1.0
-# Date: Oct 3, 2016
+# Version: 1.1
+# Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
 
-
-# runs the greedy algorithm. first argument is path to data file. second argument is name to save
-# pickle containing results.
-import time
-start_time = time.time()
-from greedy import *
 import sys
+
+# Runs the greedy algorithm.
+# Command line arguments: first argument is path to data file. Second argument is path to save output.
+# Third argument (*optional*) is path where the node suspiciousness values are stored.
+import time
+
+from greedy import *
+
+start_time = time.time()
 M = readData(sys.argv[1])
-print "finished reading data: shape = ", M.shape, " @ ", time.time() - start_time
+# The example data is a 500 x 500 matrix with an injected dense block among the first 20 nodes
+print("finished reading data: shape = %d, %d @ %d" % (M.shape[0], M.shape[1], time.time() - start_time))
 
-# (m, n) = (500, 500)
-# M = M[0:m, 0:n]
-# M[0:20, 0:20] = 1
-# M2 = M.toarray().astype(int)
-# print np.transpose(np.nonzero(M2))
-# np.savetxt('example.txt', np.transpose(np.nonzero(M2)), fmt='%d')
+if len(sys.argv) > 3:  # node suspiciousness present
+    print("using node suspiciousness")
+    rowSusp = np.loadtxt("%s.rows" % (sys.argv[3],))
+    colSusp = np.loadtxt("%s.cols" % (sys.argv[3],))
+    lwRes = logWeightedAveDegree(M, (rowSusp, colSusp))
+else:
+    lwRes = logWeightedAveDegree(M)
 
-# M, rowFilter, colFilter = subsetAboveDegree(M, int(sys.argv[3]), int(sys.argv[4]))
-# filter_name = "output/%s_%s_%s_filter.pickle" % (sys.argv[2], sys.argv[3], sys.argv[4])
-# pickle.dump((rowFilter, colFilter), open(filter_name, "wb" ))
-# print "finished subsetting: shape = ", M.shape, " @ ", time.time() - start_time
-# subset_filepath = '%s_%s_%s.txt' % (sys.argv[2], sys.argv[3], sys.argv[4])
-# pickle.dump(M, open(subset_filepath, "wb"))
-# np.savetxt(subset_filepath, M.nonzero().transpose(), fmt='%i')
+print(lwRes)
+np.savetxt("%s.rows" % (sys.argv[2],), np.array(list(lwRes[0][0])), fmt="%d")
+np.savetxt("%s.cols" % (sys.argv[2],), np.array(list(lwRes[0][1])), fmt="%d")
+print("score obtained is %f" % (lwRes[1],))
+print("done @ %f" % (time.time() - start_time,))
 
-print "finished writing data", " @ ", time.time() - start_time
-lwRes = logWeightedAveDegree(M)
-print lwRes
-np.savetxt("%s.rows" % (sys.argv[2], ), np.array(list(lwRes[0][0])), fmt='%d')
-np.savetxt("%s.cols" % (sys.argv[2], ), np.array(list(lwRes[0][1])), fmt='%d')
-print "score obtained is ", lwRes[1]
-print "done @ ", time.time() - start_time
+# When no node suspiciousness values are passed, we detect the injected block.
+# However, when adding large suspiciousness values to the first 10 rows and columns,
+# the new detected block becomes the first 10 rows and columns.
+# Intuitively, the first 10 rows and columns are now suspiciousness enough that it no longer becomes worth it
+# for the algorithm to include the remaining 10 rows and columns.

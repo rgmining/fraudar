@@ -13,15 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Version: 1.0
-# Date: Oct 3, 2016
+# Version: 1.1
+# Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
 
+from .MinTree import MinTree
 
-import math
-import random
-
-T = MinTree([1,4,2,5,3])
+T = MinTree([1, 4, 2, 5, 3])
 T.dump()
 T.popMin()
 T.dump()
@@ -38,7 +36,7 @@ T.dump()
 T.popMin()
 T.dump()
 
-T = SamplingTree([10,40,12,50,30], 1)
+T = SamplingTree([10, 40, 12, 50, 30], 1)
 T.dump()
 T.sample()
 T.dump()
