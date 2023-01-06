@@ -70,4 +70,12 @@ disallow_untyped_defs = true
 
 
 [tool.pytest.ini_options]
-addopts = "--cov='fraudar' --cov-branch --cov-report=term --cov-report xml"
+addopts = "--cov=fraudar --cov-branch --cov-report=term-missing --cov-report=xml"
+
+
+[tool.coverage.run]
+omit = ["fraudar/export/*"]
+
+
+[tool.coverage.report]
+exclude_lines = ["\\.{3}"]
