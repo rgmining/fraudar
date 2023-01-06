@@ -33,9 +33,9 @@ numpy = "^1.24.1"
 scikit-learn = "^1.2.0"
 
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 bump2version = "^1.0.1"
-pre-commit = "^2.17.0"
+pre-commit = "^2.21.0"
 isort = "^5.10.1"
 flake8 = "^6.0.0"
 black = "^22.1.0"
@@ -70,4 +70,4 @@ disallow_untyped_defs = true
 
 
 [tool.pytest.ini_options]
-addopts = "--cov='fraudar' --cov-branch"
+addopts = "--cov='fraudar' --cov-branch --cov-report=term --cov-report xml"
