@@ -12,6 +12,7 @@
 
 import sys
 from os import path
+
 import sphinx_rtd_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -19,7 +20,7 @@ import sphinx_rtd_theme
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 abspath = path.abspath(path.dirname(__file__))
-sys.path.append(path.join(abspath, '../../'))
+sys.path.append(path.join(abspath, "../../"))
 
 # -- General configuration ------------------------------------------------
 
@@ -31,42 +32,42 @@ sys.path.append(path.join(abspath, '../../'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
-    'sphinx.ext.graphviz',
-    "sphinx.ext.napoleon"
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.graphviz",
+    "sphinx.ext.napoleon",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The encoding of source files.
 #
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = u'Wrapper of FRAUDAR algorithm'
-copyright = u'2016-2017, Junpei Kawamoto'
-author = u'Junpei Kawamoto'
+project = "Wrapper of FRAUDAR algorithm"
+copyright = "2016-2017, Junpei Kawamoto"
+author = "Junpei Kawamoto"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = u'0.6.1'
+release = "0.6.1"
 # The short X.Y version.
 version = release[:3]
 
@@ -111,7 +112,7 @@ exclude_patterns = []
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -140,16 +141,14 @@ html_context = {
     "google_analytics": "UA-82315630-2",
     "google_adsense": "ca-pub-4734862314145555",
     "google_adsense_slot": "6934003829",
-    "addthis": "ra-57f1fa5b740feddd"
+    "addthis": "ra-57f1fa5b740feddd",
 }
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    'collapse_navigation': True
-}
+html_theme_options = {"collapse_navigation": True}
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
@@ -176,7 +175,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -232,7 +231,7 @@ html_static_path = ['_static']
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
 #
-html_use_opensearch = 'https://docs.python.org'
+html_use_opensearch = "https://docs.python.org"
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
@@ -256,34 +255,30 @@ html_use_opensearch = 'https://docs.python.org'
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Fraudardoc'
+htmlhelp_basename = "Fraudardoc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-     # The paper size ('letterpaper' or 'a4paper').
-     #
-     # 'papersize': 'letterpaper',
-
-     # The font size ('10pt', '11pt' or '12pt').
-     #
-     # 'pointsize': '10pt',
-
-     # Additional stuff for the LaTeX preamble.
-     #
-     # 'preamble': '',
-
-     # Latex figure (float) alignment
-     #
-     # 'figure_align': 'htbp',
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': '',
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Fraudar.tex', u'Fraudar Documentation',
-     u'Junpei Kawamoto', 'manual'),
+    (master_doc, "Fraudar.tex", "Fraudar Documentation", "Junpei Kawamoto", "manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -323,10 +318,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'fraudardataset', u'Fraudar Documentation',
-     [author], 1)
-]
+man_pages = [(master_doc, "fraudardataset", "Fraudar Documentation", [author], 1)]
 
 # If true, show URL addresses after external links.
 #
@@ -339,9 +331,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Fraudar', u'Fraudar Documentation',
-     author, 'Fraudar', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        "Fraudar",
+        "Fraudar Documentation",
+        author,
+        "Fraudar",
+        "One line description of project.",
+        "Miscellaneous",
+    ),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -365,5 +363,5 @@ texinfo_documents = [
 intersphinx_mapping = {
     "project": ("https://rgmining.github.io", None),
     "dataset-io": ("https://rgmining.github.io/dataset-io", None),
-    'python': ('https://docs.python.org/3.4', None),
+    "python": ("https://docs.python.org/3.4", None),
 }
