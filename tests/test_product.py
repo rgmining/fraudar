@@ -34,3 +34,9 @@ def test_summary(review_graph: ReviewGraph) -> None:
     assert_almost_equal(
         review_graph.products[2].summary, review_graph.reviews[review_graph.products[2]][review_graph.reviewers[1]]
     )
+
+    for r in review_graph.reviewers:
+        r.anomalous_score = 1
+    assert_almost_equal(
+        review_graph.products[2].summary, np.mean(list(review_graph.reviews[review_graph.products[2]].values()))
+    )
