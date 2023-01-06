@@ -1,7 +1,7 @@
 A wrapper of FRAUDAR algorithm
 ==============================
 
-|GPLv3| |Build Status| |wercker status| |Code Climate| |Release|
+|GPLv3| |Build Status| |Maintainability| |Test Coverage| |Release|
 
 |Logo|
 
@@ -39,13 +39,13 @@ https://bhooi.github.io/projects/fraudar/index.html.
 
 .. |GPLv3| image:: https://img.shields.io/badge/license-GPLv3-blue.svg
    :target: https://www.gnu.org/copyleft/gpl.html
-.. |Build Status| image:: https://travis-ci.org/rgmining/fraudar.svg?branch=master
-   :target: https://travis-ci.org/rgmining/fraudar
-.. |wercker status| image:: https://app.wercker.com/status/0187c42cbf06f25156d1cc6bf6ca6ae8/s/master
-   :target: https://app.wercker.com/project/byKey/0187c42cbf06f25156d1cc6bf6ca6ae8
-.. |Code Climate| image:: https://codeclimate.com/github/rgmining/fraudar/badges/gpa.svg
-   :target: https://codeclimate.com/github/rgmining/fraudar
+.. |Build Status| image:: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml/badge.svg
+   :target: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml
+.. |Maintainability| image:: https://api.codeclimate.com/v1/badges/4c4c3df79b33f65b77cd/maintainability
+   :target: https://codeclimate.com/github/rgmining/fraudar/maintainability
+.. |Test Coverage| image:: https://api.codeclimate.com/v1/badges/4c4c3df79b33f65b77cd/test_coverage
+   :target: https://codeclimate.com/github/rgmining/fraudar/test_coverage
 .. |Release| image:: https://img.shields.io/badge/release-0.6.1-brightgreen.svg
-   :target: https://github.com/rgmining/fraudar/releases/tag/v0.6.1
+   :target: https://pypi.org/project/rgmining-fraudar/
 .. |Logo| image:: https://rgmining.github.io/fraudar/_static/image.png
    :target: https://rgmining.github.io/fraudar/
