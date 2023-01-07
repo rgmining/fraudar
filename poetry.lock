@@ -693,21 +693,6 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
-name = "pockets"
-version = "0.9.1"
-description = "A collection of helpful Python tools!"
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pockets-0.9.1-py2.py3-none-any.whl", hash = "sha256:68597934193c08a08eb2bf6a1d85593f627c22f9b065cc727a4f03f669d96d86"},
-    {file = "pockets-0.9.1.tar.gz", hash = "sha256:9320f1a3c6f7a9133fe3b571f283bcf3353cd70249025ae8d618e40e9f7e92b3"},
-]
-
-[package.dependencies]
-six = ">=1.5.2"
-
-[[package]]
 name = "pre-commit"
 version = "2.21.0"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
@@ -1192,22 +1177,6 @@ files = [
 test = ["flake8", "mypy", "pytest"]
 
 [[package]]
-name = "sphinxcontrib-napoleon"
-version = "0.7"
-description = "Sphinx \"napoleon\" extension."
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "sphinxcontrib-napoleon-0.7.tar.gz", hash = "sha256:407382beed396e9f2d7f3043fad6afda95719204a1e1a231ac865f40abcbfcf8"},
-    {file = "sphinxcontrib_napoleon-0.7-py2.py3-none-any.whl", hash = "sha256:711e41a3974bdf110a484aec4c1a556799eb0b3f3b897521a018ad7e2db13fef"},
-]
-
-[package.dependencies]
-pockets = ">=0.3"
-six = ">=1.5.2"
-
-[[package]]
 name = "sphinxcontrib-qthelp"
 version = "1.0.3"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp document."
@@ -1286,14 +1255,14 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.2.4"
+version = "4.2.6"
 description = "tox is a generic virtualenv management and test command line tool"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "tox-4.2.4-py3-none-any.whl", hash = "sha256:f51407aaff87f6f5361ae2733cffd371940ed001792b60ea50d955c266b3b22b"},
-    {file = "tox-4.2.4.tar.gz", hash = "sha256:05b1cbf94e02eff40818860b352b4a452d7369558f3bb05809043c6b4c36e5f4"},
+    {file = "tox-4.2.6-py3-none-any.whl", hash = "sha256:fb79b3e4b788491949576a9c80c2d56419eac994567c3591e24bb2788b5901d0"},
+    {file = "tox-4.2.6.tar.gz", hash = "sha256:ecf224a4f3a318adcdd71aa8fe15ffd31f14afd6a9845a43ffd63950a7325538"},
 ]
 
 [package.dependencies]
@@ -1381,4 +1350,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "043a58da6d29bd442258f99d4f7368689614324eb8c3c4cf0b09ee18751d5bb5"
+content-hash = "c6c710ae63450ed1f5cdb0a0a1be195063a44c3e3a70204577195f13fefca382"
