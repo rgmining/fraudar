@@ -10,7 +10,7 @@ A wrapper of FRAUDAR algorithm
    <div class="addthis_inline_share_toolbox"></div>
 
 This package implements a wrapper of
-`FRAUDAR <https://www.andrew.cmu.edu/user/bhooi/projects/fraudar/index.html>`_
+`FRAUDAR <https://bhooi.github.io/projects/fraudar/index.html>`_
 algorithm to provide APIs defined in
 `Review Graph Mining project`_.
 
@@ -259,11 +259,11 @@ This software is released under The GNU General Public License Version 3,
 see `COPYING <https://github.com/rgmining/fraudar/blob/master/COPYING>`_ for more detail.
 
 The original FRAUDAR source code, which is in ``fraudar/export``, are made by
-`Bryan Hooi <https://www.andrew.cmu.edu/user/bhooi/index.html>`_,
+`Bryan Hooi <https://bhooi.github.io/index.html>`_,
 `Hyun Ah Song <http://www.cs.cmu.edu/~hyunahs/>`_,
 `Alex Beutel <http://alexbeutel.com/>`_,
-`Neil Shah <http://www.cs.cmu.edu/~neilshah/>`_,
-`Kijung Shin <http://www.cs.cmu.edu/~kijungs/>`_, and
+`Neil Shah <http://nshah.net/>`_,
+`Kijung Shin <https://kijungs.github.io/>`_, and
 `Christos Faloutsos <http://www.cs.cmu.edu/~christos/>`_,
 and licensed under `Apache License, Version 2.0 <https://github.com/rgmining/fraudar/blob/master/LICENSE-2.0>`_.
 

@@ -31,23 +31,22 @@ from fraudar.export import greedy
 from fraudar.export.greedy import logWeightedAveDegree
 
 
-class _Node:
+class Node:
     """Node of the ReviewGraph.
 
-    A node has a name and a link to the graph. It also implements __hash__
-    function so that each node can be stored in dictionaries.
+    A node has a name and a link to the graph. It also implements
+    :meth:`__hash__` function so that each node can be stored in
+    dictionaries.
 
     Args:
-      graph: graph object this node belongs to.
-      name: name of this node.
-
-    Attributes:
       graph: graph object this node belongs to.
       name: name of this node.
     """
 
     graph: Final["ReviewGraph"]
+    """The graph object this node belongs to."""
     name: Final[str]
+    """Name of this node."""
 
     __slots__ = ("graph", "name")
 
@@ -65,11 +64,11 @@ class _Node:
         """Returns a hash value of this instance."""
         return 13 * hash(type(self)) + 17 * hash(self.name)
 
-    def __lt__(self, other: "_Node") -> bool:
+    def __lt__(self, other: "Node") -> bool:
         return self.name.__lt__(other.name)
 
 
-class Reviewer(_Node):
+class Reviewer(Node):
     """A node type representing a reviewer.
 
     Use :meth:`ReviewGraph.new_reviewer` to create a new reviewer object
@@ -78,13 +77,10 @@ class Reviewer(_Node):
     Args:
       graph: graph object this reviewer belongs to.
       name: name of this reviewer.
-
-    Attributes:
-      name: name of this reviewer.
-      anomalous_score: anomalous score of this reviewer.
     """
 
     anomalous_score: float
+    """anomalous score of this reviewer."""
 
     __slots__ = ("anomalous_score",)
 
@@ -93,7 +89,7 @@ class Reviewer(_Node):
         self.anomalous_score = anomalous_score
 
 
-class Product(_Node):
+class Product(Node):
     """A node type representing a product.
 
     Use :meth:`ReviewGraph.new_product` to create a new product object
@@ -102,12 +98,6 @@ class Product(_Node):
     Args:
       graph: graph object this product belongs to.
       name: name of this product.
-
-    Attributes:
-      name: name of this product.
-
-    Properties:
-      summary: summary of ratings given to this product.
     """
 
     __slots__ = ()
@@ -124,7 +114,7 @@ class Product(_Node):
             return float(np.average(ratings, weights=weights))
 
 
-class Writable(Protocol):
+class _Writable(Protocol):
     def write(self, s: str, /) -> int:
         ...
 
@@ -140,28 +130,29 @@ class ReviewGraph:
         and
         :meth:`logWeightedAveDegree <fraudar.export.greedy.logWeightedAveDegree>`.
         (default: logWeightedAveDegree)
-
-    Attributes:
-      reviewers: collection of reviewers.
-      products: collection of products.
-      reviews: dictionary of which key is a product and value is another
-        dictionary of which key is a reviewer and value is a rating from the
-        reviewer to the product.
     """
 
     reviewers: Final[list[Reviewer]]
+    """Collection of reviewers."""
     products: Final[list[Product]]
+    """Collection of products."""
     reviews: Final[defaultdict[Product, dict[Reviewer, float]]]
-    algo: Final[Any]
-    blocks: Final[int]
+    """Collection of reviews.
+
+    reviews is a dictionary of which key is a product and value is another
+    dictionary of which key is a reviewer and value is a rating from the
+    reviewer to the product.
+    """
+    _algo: Final[Any]
+    _blocks: Final[int]
 
     def __init__(self, blocks: int = 1, algo: Any = logWeightedAveDegree) -> None:
         self.reviewers = []
         self.products = []
         self.reviews = defaultdict(dict)
 
-        self.algo = algo
-        self.blocks = blocks
+        self._algo = algo
+        self._blocks = blocks
 
     def new_reviewer(self, name: str, **_kwargs: Any) -> Reviewer:
         """Create a new reviewer.
@@ -216,7 +207,7 @@ class ReviewGraph:
 
             # Run greedy algorithm.
             M = greedy.readData(fp.name)
-            res = greedy.detectMultiple(M, self.algo, self.blocks)
+            res = greedy.detectMultiple(M, self._algo, self._blocks)
 
             # Update anomalous scores.
             for block in res:
@@ -225,7 +216,7 @@ class ReviewGraph:
 
         return 0
 
-    def _store_matrix(self, fp: Writable) -> None:
+    def _store_matrix(self, fp: _Writable) -> None:
         """Store this graph as a sparse matrix format.
 
         Args:

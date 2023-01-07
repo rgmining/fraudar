@@ -28,11 +28,11 @@ This software is released under The GNU General Public License Version
 for more detail.
 
 The original FRAUDAR source code is made by `Bryan
-Hooi <https://www.andrew.cmu.edu/user/bhooi/index.html>`__, `Hyun Ah
+Hooi <https://bhooi.github.io/index.html>`__, `Hyun Ah
 Song <http://www.cs.cmu.edu/~hyunahs/>`__, `Alex
 Beutel <http://alexbeutel.com/>`__, `Neil
-Shah <http://www.cs.cmu.edu/~neilshah/>`__, `Kijung
-Shin <http://www.cs.cmu.edu/~kijungs/>`__, and `Christos
+Shah <http://nshah.net/>`__, `Kijung
+Shin <https://kijungs.github.io/>`__, and `Christos
 Faloutsos <http://www.cs.cmu.edu/~christos/>`__, and licensed under
 `Apache License, Version 2.0 <LICENSE-2.0>`__. It is available at
 https://bhooi.github.io/projects/fraudar/index.html.
