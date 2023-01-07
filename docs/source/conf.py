@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# pylint: skip-file
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -9,18 +7,17 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
+from datetime import datetime
 
-import sys
-from os import path
+# noinspection PyUnresolvedReferences
+import sphinx_rtd_theme  # noqa: F401
 
-import sphinx_rtd_theme
+import fraudar
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-abspath = path.abspath(path.dirname(__file__))
-sys.path.append(path.join(abspath, "../../"))
 
 # -- General configuration ------------------------------------------------
 
@@ -39,6 +36,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx.ext.graphviz",
     "sphinx.ext.napoleon",
+    "sphinx_rtd_theme",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,7 +57,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Wrapper of FRAUDAR algorithm"
-copyright = "2016-2017, Junpei Kawamoto"
+copyright = f"2016-{datetime.now().year}, Junpei Kawamoto"
 author = "Junpei Kawamoto"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -67,7 +65,7 @@ author = "Junpei Kawamoto"
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = "0.6.1"
+release = fraudar.__version__
 # The short X.Y version.
 version = release[:3]
 
@@ -76,7 +74,7 @@ version = release[:3]
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -150,12 +148,12 @@ html_context = {
 #
 html_theme_options = {"collapse_navigation": True}
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# html_theme_path = []
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'Review Graph Mining Common Library v0.9.0'
+# html_title = u''
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -365,3 +363,7 @@ intersphinx_mapping = {
     "dataset-io": ("https://rgmining.github.io/dataset-io", None),
     "python": ("https://docs.python.org/3.4", None),
 }
+
+# -- Options for autodoc output -------------------------------------------
+autodoc_member_order = "groupwise"
+autodoc_typehints_format = "short"
