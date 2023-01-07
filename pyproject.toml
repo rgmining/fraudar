@@ -26,12 +26,10 @@ packages = [
 ]
 include = ["COPYING", "LICENSE-2.0"]
 
-
 [tool.poetry.dependencies]
 python = "^3.9"
 numpy = "^1.24.1"
 scikit-learn = "^1.2.0"
-
 
 [tool.poetry.group.dev.dependencies]
 bump2version = "^1.0.1"
@@ -45,22 +43,26 @@ pytest-cov = "^4.0.0"
 pytest-mock = "^3.7.0"
 tox = "^4.2.3"
 
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^5.3.0"
+sphinx-rtd-theme = "^1.1.1"
+sphinx-autobuild = "^2021.3.14"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.black]
 target-version = ['py39']
 line-length = 120
-
 
 [tool.isort]
 profile = "black"
 line_length = 120
 src_paths = ["fraudar", "tests"]
-
 
 [tool.mypy]
 files = "fraudar/*.py,tests/**/*.py"
@@ -68,14 +70,11 @@ warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
 
-
 [tool.pytest.ini_options]
 addopts = "--cov=fraudar --cov-branch --cov-report=term-missing --cov-report=xml"
 
-
 [tool.coverage.run]
 omit = ["fraudar/export/*"]
-
 
 [tool.coverage.report]
 exclude_lines = ["\\.{3}"]
