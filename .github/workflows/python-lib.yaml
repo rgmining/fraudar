@@ -11,33 +11,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
-    - name: Install poetry
-      run: |
-        curl -sSL https://install.python-poetry.org | python -
-    - uses: actions/cache@v3
-      with:
-        path: ~/.cache/pypoetry/virtualenvs
-        key: poetry-${{ hashFiles('**/poetry.lock') }}
-    - name: Install dependencies
-      run: poetry install
-    - uses: actions/cache@v3
-      with:
-        path: ~/.cache/pre-commit
-        key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
-    - name: Check files
-      run: poetry run pre-commit run --all-files
-    - name: Report test coverage to Code Climate
-      uses: paambaati/codeclimate-action@v3.2.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
-        coverageLocations: coverage.xml:coverage.py
-    - name: Build and release
-      run: |
-        poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
-        poetry publish --build
-      if: startsWith(github.ref, 'refs/tags/')
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+      - name: Check files
+        run: poetry run pre-commit run --all-files
+      - name: Report test coverage to Code Climate
+        uses: paambaati/codeclimate-action@v3.2.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: coverage.xml:coverage.py
+      - name: Build and release
+        run: |
+          poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+          poetry publish --build
+        if: startsWith(github.ref, 'refs/tags/')
