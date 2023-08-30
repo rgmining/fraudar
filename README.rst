@@ -45,7 +45,7 @@ https://bhooi.github.io/projects/fraudar/index.html.
    :target: https://codeclimate.com/github/rgmining/fraudar/maintainability
 .. |Test Coverage| image:: https://api.codeclimate.com/v1/badges/4c4c3df79b33f65b77cd/test_coverage
    :target: https://codeclimate.com/github/rgmining/fraudar/test_coverage
-.. |Release| image:: https://img.shields.io/badge/release-0.7.2-brightgreen.svg
+.. |Release| image:: https://img.shields.io/badge/release-0.7.3-brightgreen.svg
    :target: https://pypi.org/project/rgmining-fraudar/
 .. |Logo| image:: https://rgmining.github.io/fraudar/_static/image.png
    :target: https://rgmining.github.io/fraudar/
