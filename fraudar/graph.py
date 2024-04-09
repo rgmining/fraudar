@@ -1,7 +1,7 @@
 #
 #  graph.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2024 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -115,8 +115,7 @@ class Product(Node):
 
 
 class _Writable(Protocol):
-    def write(self, s: str, /) -> int:
-        ...
+    def write(self, s: str, /) -> int: ...
 
 
 class ReviewGraph:
