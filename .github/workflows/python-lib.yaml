@@ -29,11 +29,12 @@ jobs:
       - name: Check files
         run: poetry run pre-commit run --all-files
       - name: Report test coverage to Code Climate
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: paambaati/codeclimate-action@v6.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageLocations: coverage.xml:coverage.py
+        if: github.ref == 'refs/heads/main'
       - name: Build and release
         run: |
           poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
