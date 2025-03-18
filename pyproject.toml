@@ -48,7 +48,7 @@ packages = [
 include = [ "COPYING", "LICENSE-2.0" ]
 
 [tool.poetry.group.dev.dependencies]
-bump2version = "^1.0.1"
+bump-my-version = "^1.0.2"
 pre-commit = "^4.1"
 pre-commit-uv = "^4.1.4"
 pytest = "^8.3.5"
@@ -77,6 +77,25 @@ omit = [ "fraudar/export/*" ]
 
 [tool.coverage.report]
 exclude_lines = [ "\\.{3}" ]
+
+[tool.bumpversion]
+current_version = "0.7.3"
+commit = true
+pre_commit_hooks = [
+  "poetry lock",
+  "git add poetry.lock",
+]
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "README.rst"
+
+[[tool.bumpversion.files]]
+filename = "fraudar/__version__.py"
 
 [tool.mypy]
 files = "fraudar/*.py,tests/**/*.py"
