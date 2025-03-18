@@ -24,14 +24,19 @@ import sys
 # Third argument (*optional*) is path where the node suspiciousness values are stored.
 import time
 
-from .greedy import *
+import numpy as np
+
+from fraudar.export.greedy import logWeightedAveDegree, readData
 
 
 def main():
     start_time = time.time()
     M = readData(sys.argv[1])
     # The example data is a 500 x 500 matrix with an injected dense block among the first 20 nodes
-    print("finished reading data: shape = %d, %d @ %d" % (M.shape[0], M.shape[1], time.time() - start_time))
+    print(
+        "finished reading data: shape = %d, %d @ %d"
+        % (M.shape[0], M.shape[1], time.time() - start_time)
+    )
 
     if len(sys.argv) > 3:  # node suspiciousness present
         print("using node suspiciousness")
