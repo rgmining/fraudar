@@ -27,6 +27,11 @@ repos:
       - id: mypy
         args: []
         additional_dependencies: ["numpy>=2.2", "scikit-learn>=1.6.1", "pytest>=8.3.5", "click>=8", "rgmining-synthetic-dataset>=0.9"]
+  - repo: https://github.com/python-poetry/poetry
+    rev: "2.1.1"
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
   - repo: local
     hooks:
       - id: pytest
