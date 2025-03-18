@@ -16,6 +16,8 @@
 # Version: 1.1
 # Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
+#
+# mypy: ignore-errors
 
 import sys
 
@@ -24,7 +26,9 @@ import sys
 # Third argument (*optional*) is path where the node suspiciousness values are stored.
 import time
 
-from .greedy import *
+import numpy as np
+
+from fraudar.export.greedy import logWeightedAveDegree, readData
 
 
 def main():

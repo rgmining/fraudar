@@ -1,7 +1,7 @@
 #
 #  __init__.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -37,10 +37,17 @@ and three sub algorithms used in FRAUDER:
 :meth:`ReviewGraph <graph.ReviewGraph>` takes keyword argument ``algo`` to
 be set the sub algorithm to be used.
 """
+
 from typing import Final
 
 from fraudar.__version__ import __version__
 from fraudar.export.greedy import aveDegree, logWeightedAveDegree, sqrtWeightedAveDegree
 from fraudar.graph import ReviewGraph
 
-__all__: Final = ("ReviewGraph", "aveDegree", "sqrtWeightedAveDegree", "logWeightedAveDegree", "__version__")
+__all__: Final = (
+    "ReviewGraph",
+    "aveDegree",
+    "sqrtWeightedAveDegree",
+    "logWeightedAveDegree",
+    "__version__",
+)

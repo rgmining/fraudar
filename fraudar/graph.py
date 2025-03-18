@@ -1,7 +1,7 @@
 #
 #  graph.py
 #
-#  Copyright (c) 2016-2024 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -18,8 +18,8 @@
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
-"""Provide a review graph which runs Fraudar algorithm.
-"""
+"""Provide a review graph which runs Fraudar algorithm."""
+
 import tempfile
 from bisect import bisect_left
 from collections import defaultdict
@@ -153,7 +153,7 @@ class ReviewGraph:
         self._algo = algo
         self._blocks = blocks
 
-    def new_reviewer(self, name: str, **_kwargs: Any) -> Reviewer:
+    def new_reviewer(self, name: str) -> Reviewer:
         """Create a new reviewer.
 
         Args:
@@ -179,7 +179,7 @@ class ReviewGraph:
         self.products.append(p)
         return p
 
-    def add_review(self, reviewer: Reviewer, product: Product, rating: float, **_kwargs: Any) -> float:
+    def add_review(self, reviewer: Reviewer, product: Product, rating: float) -> float:
         """Add a review from a reviewer to a product.
 
         Args:

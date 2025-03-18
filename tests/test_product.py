@@ -1,7 +1,7 @@
 #
 #  test_product.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -27,16 +27,19 @@ from fraudar import ReviewGraph
 def test_summary(review_graph: ReviewGraph) -> None:
     """Test summary property."""
     assert_almost_equal(
-        review_graph.products[2].summary, np.mean(list(review_graph.reviews[review_graph.products[2]].values()))
+        review_graph.products[2].summary,
+        np.mean(list(review_graph.reviews[review_graph.products[2]].values())),
     )
 
     review_graph.reviewers[0].anomalous_score = 1
     assert_almost_equal(
-        review_graph.products[2].summary, review_graph.reviews[review_graph.products[2]][review_graph.reviewers[1]]
+        review_graph.products[2].summary,
+        review_graph.reviews[review_graph.products[2]][review_graph.reviewers[1]],
     )
 
     for r in review_graph.reviewers:
         r.anomalous_score = 1
     assert_almost_equal(
-        review_graph.products[2].summary, np.mean(list(review_graph.reviews[review_graph.products[2]].values()))
+        review_graph.products[2].summary,
+        np.mean(list(review_graph.reviews[review_graph.products[2]].values())),
     )

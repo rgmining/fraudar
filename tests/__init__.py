@@ -1,7 +1,7 @@
 #
 #  __init__.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -18,5 +18,4 @@
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraudar. If not, see <http://www.gnu.org/licenses/>.
 #
-"""Provide unit tests for fraudar package.
-"""
+"""Provide unit tests for fraudar package."""

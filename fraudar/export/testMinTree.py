@@ -17,6 +17,7 @@
 # Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
 
+# mypy: ignore-errors
 from .MinTree import MinTree
 
 
@@ -38,22 +39,22 @@ def main():
     T.popMin()
     T.dump()
 
-    T = SamplingTree([10, 40, 12, 50, 30], 1)
-    T.dump()
-    T.sample()
-    T.dump()
-    T.sample()
-    T.dump()
-    T.changeVal(3, 3)
-    T.dump()
-    T.sample()
-    T.dump()
-    T.sample()
-    T.dump()
-    T.changeVal(4, 10)
-    T.dump()
-    T.sample()
-    T.dump()
+    # T = SamplingTree([10, 40, 12, 50, 30], 1)
+    # T.dump()
+    # T.sample()
+    # T.dump()
+    # T.sample()
+    # T.dump()
+    # T.changeVal(3, 3)
+    # T.dump()
+    # T.sample()
+    # T.dump()
+    # T.sample()
+    # T.dump()
+    # T.changeVal(4, 10)
+    # T.dump()
+    # T.sample()
+    # T.dump()
 
 
 if __name__ == "__main__":

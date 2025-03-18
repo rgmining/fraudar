@@ -1,7 +1,7 @@
 #
 #  greedy.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -21,11 +21,13 @@
 #  This file was originally made by Bryan Hooi et al,
 #  and distributed under Apache License, Version 2.0.
 #
+# mypy: ignore-errors
 """
 This module contains functions that run the greedy detector for dense regions in a sparse matrix.
 use aveDegree or sqrtWeightedAveDegree or logWeightedAveDegree on a sparse matrix,
 which returns ((rowSet, colSet), score) for the most suspicious block.
 """
+
 import random
 
 import numpy as np
@@ -204,7 +206,6 @@ def fastGreedyDecreasing(M, colWeights, nodeSusp=None):
     (m, n) = M.shape
     if nodeSusp is None:
         nodeSusp = (np.zeros(m), np.zeros(n))
-    Md = M.todok()
     Ml = M.tolil()
     Mlt = M.transpose().tolil()
     rowSet = set(range(0, m))
@@ -212,7 +213,6 @@ def fastGreedyDecreasing(M, colWeights, nodeSusp=None):
     curScore = c2Score(M, rowSet, colSet, nodeSusp)
 
     bestAveScore = curScore / (len(rowSet) + len(colSet))
-    bestSets = (rowSet, colSet)
     print("finished initialization")
     rowDeltas = (
         np.squeeze(M.sum(axis=1).A) + nodeSusp[0]
@@ -235,7 +235,6 @@ def fastGreedyDecreasing(M, colWeights, nodeSusp=None):
         if rowDelt <= colDelt:
             curScore -= rowDelt
             for j in Ml.rows[nextRow]:
-                delt = colWeights[j]
                 colTree.changeVal(j, -colWeights[j])
             rowSet -= {nextRow}
             rowTree.changeVal(nextRow, float("inf"))
@@ -243,7 +242,6 @@ def fastGreedyDecreasing(M, colWeights, nodeSusp=None):
         else:
             curScore -= colDelt
             for i in Mlt.rows[nextCol]:
-                delt = colWeights[nextCol]
                 rowTree.changeVal(i, -colWeights[nextCol])
             colSet -= {nextCol}
             colTree.changeVal(nextCol, float("inf"))

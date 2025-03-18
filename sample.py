@@ -29,11 +29,12 @@ To install that package, run
     $ pip install --upgrade rgmining-synthetic-dataset
 
 """
+
 import sys
 from os import path
 
 import click
-import synthetic  # pylint: disable=import-error
+import synthetic
 
 sys.path.append(path.join(path.dirname(__file__), "../"))
 import fraudar  # pylint: disable=import-error, wrong-import-position
@@ -41,7 +42,7 @@ import fraudar  # pylint: disable=import-error, wrong-import-position
 
 @click.command()
 @click.argument("blocks", type=int)
-def analyze(blocks):
+def analyze(blocks: int) -> None:
     """Analyze a synthetic data set with a given number of blocks.
 
     Args:

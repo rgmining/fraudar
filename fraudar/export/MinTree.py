@@ -1,7 +1,7 @@
 #
 #  MinTree.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraudar.
 #
@@ -21,6 +21,7 @@
 #  This file was originally made by Bryan Hooi et al,
 #  and distributed under Apache License, Version 2.0.
 #
+# mypy: ignore-errors
 import math
 
 
