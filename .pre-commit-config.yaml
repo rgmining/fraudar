@@ -26,16 +26,12 @@ repos:
     hooks:
       - id: mypy
         args: []
-        additional_dependencies: ["numpy>=2.2", "scikit-learn>=1.6.1", "pytest>=8.1.1"]
-  - repo: https://github.com/tox-dev/tox-ini-fmt
-    rev: "1.5.0"
-    hooks:
-      - id: tox-ini-fmt
+        additional_dependencies: ["numpy>=2.2", "scikit-learn>=1.6.1", "pytest>=8.1.1", "click>=8", "rgmining-synthetic-dataset>=0.9"]
   - repo: local
     hooks:
-      - id: tox
-        name: run tox
-        entry: poetry run tox
-        language: python
-        files: .py$
+      - id: pytest
+        name: Run pytest
+        entry: poetry run pytest
+        language: system
         pass_filenames: false
+        always_run: true

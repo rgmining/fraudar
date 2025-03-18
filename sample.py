@@ -34,7 +34,7 @@ import sys
 from os import path
 
 import click
-import synthetic  # pylint: disable=import-error
+import synthetic
 
 sys.path.append(path.join(path.dirname(__file__), "../"))
 import fraudar  # pylint: disable=import-error, wrong-import-position
@@ -42,7 +42,7 @@ import fraudar  # pylint: disable=import-error, wrong-import-position
 
 @click.command()
 @click.argument("blocks", type=int)
-def analyze(blocks):
+def analyze(blocks: int) -> None:
     """Analyze a synthetic data set with a given number of blocks.
 
     Args:
@@ -56,9 +56,7 @@ def analyze(blocks):
     detected = [r for r in graph.reviewers if r.anomalous_score]
     correct = [r for r in detected if "anomaly" in r.name]
 
-    print(
-        len(correct) / len(detected), len(correct) / synthetic.ANOMALOUS_REVIEWER_SIZE
-    )
+    print(len(correct) / len(detected), len(correct) / synthetic.ANOMALOUS_REVIEWER_SIZE)
 
 
 if __name__ == "__main__":

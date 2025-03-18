@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -10,7 +11,6 @@
 from datetime import datetime
 
 # noinspection PyUnresolvedReferences
-import sphinx_rtd_theme  # noqa: F401
 
 import fraudar
 

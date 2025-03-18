@@ -44,9 +44,7 @@ np.set_printoptions(linewidth=160)
 def listToSparseMatrix(edgesSource, edgesDest):
     m = max(edgesSource) + 1
     n = max(edgesDest) + 1
-    M = sparse.coo_matrix(
-        ([1] * len(edgesSource), (edgesSource, edgesDest)), shape=(m, n)
-    )
+    M = sparse.coo_matrix(([1] * len(edgesSource), (edgesSource, edgesDest)), shape=(m, n))
     M1 = M > 0
     return M1.astype("int")
 
@@ -124,24 +122,18 @@ def c2Score(M, rowSet, colSet, nodeSusp):
 
 
 def jaccard(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(
-        set.intersection(pred[1], actual[1])
-    )
+    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
     unionSize = len(set.union(pred[0], actual[0])) + len(set.union(pred[1], actual[1]))
     return intersectSize / unionSize
 
 
 def getPrecision(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(
-        set.intersection(pred[1], actual[1])
-    )
+    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
     return intersectSize / (len(pred[0]) + len(pred[1]))
 
 
 def getRecall(pred, actual):
-    intersectSize = len(set.intersection(pred[0], actual[0])) + len(
-        set.intersection(pred[1], actual[1])
-    )
+    intersectSize = len(set.intersection(pred[0], actual[0])) + len(set.intersection(pred[1], actual[1]))
     return intersectSize / (len(actual[0]) + len(actual[1]))
 
 

@@ -16,6 +16,8 @@
 # Version: 1.1
 # Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
+#
+# mypy: ignore-errors
 
 import sys
 
@@ -33,10 +35,7 @@ def main():
     start_time = time.time()
     M = readData(sys.argv[1])
     # The example data is a 500 x 500 matrix with an injected dense block among the first 20 nodes
-    print(
-        "finished reading data: shape = %d, %d @ %d"
-        % (M.shape[0], M.shape[1], time.time() - start_time)
-    )
+    print("finished reading data: shape = %d, %d @ %d" % (M.shape[0], M.shape[1], time.time() - start_time))
 
     if len(sys.argv) > 3:  # node suspiciousness present
         print("using node suspiciousness")

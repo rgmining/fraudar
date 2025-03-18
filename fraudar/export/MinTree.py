@@ -47,11 +47,7 @@ class MinTree:
     def getMin(self):
         cur = 0
         for i in range(self.height):
-            cur = (
-                (2 * cur + 1)
-                if self.nodes[2 * cur + 1] <= self.nodes[2 * cur + 2]
-                else (2 * cur + 2)
-            )
+            cur = (2 * cur + 1) if self.nodes[2 * cur + 1] <= self.nodes[2 * cur + 2] else (2 * cur + 2)
         # print "found min at %d: %d" % (cur, self.nodes[cur])
         return (cur - self.numBranches, self.nodes[cur])
 
@@ -67,9 +63,7 @@ class MinTree:
             self.nodes[cur] = nextParent
 
     def dump(self):
-        print(
-            f"numLeaves: {self.numLeaves}, numBranches: {self.numBranches}, n: {self.n}, nodes: "
-        )
+        print(f"numLeaves: {self.numLeaves}, numBranches: {self.numBranches}, n: {self.n}, nodes: ")
         cur = 0
         for i in range(self.height + 1):
             for j in range(2**i):
