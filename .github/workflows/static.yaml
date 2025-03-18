@@ -1,15 +1,12 @@
 name: Build and deploy docs to Pages
-
 on:
   push:
     tags:
       - "v*.*.*"
   workflow_dispatch:
-
 concurrency:
   group: "pages"
   cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,7 +32,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build/html/
-
   deploy:
     needs: build
     permissions:

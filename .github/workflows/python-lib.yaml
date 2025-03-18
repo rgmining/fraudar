@@ -1,12 +1,10 @@
 name: Python library
-
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     tags:
       - "v*.*.*"
   pull_request:
-
 jobs:
   build:
     runs-on: ubuntu-latest

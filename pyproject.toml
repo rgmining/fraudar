@@ -45,7 +45,8 @@ include = [ "COPYING", "LICENSE-2.0" ]
 
 [tool.poetry.group.dev.dependencies]
 bump2version = "^1.0.1"
-pre-commit = "^3.7.0"
+pre-commit = "^4.1"
+pre-commit-uv = "^4.1.4"
 isort = "^5.10.1"
 flake8 = "^7.0.0"
 black = "^24.3.0"
