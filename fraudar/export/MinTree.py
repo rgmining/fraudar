@@ -21,6 +21,7 @@
 #  This file was originally made by Bryan Hooi et al,
 #  and distributed under Apache License, Version 2.0.
 #
+# mypy: ignore-errors
 import math
 
 

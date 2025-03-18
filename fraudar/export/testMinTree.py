@@ -17,6 +17,7 @@
 # Date: June 12, 2018
 # Main Contact: Bryan Hooi (bhooi@andrew.cmu.edu)
 
+# mypy: ignore-errors
 from .MinTree import MinTree
 
 

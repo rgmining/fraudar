@@ -21,6 +21,7 @@
 #  This file was originally made by Bryan Hooi et al,
 #  and distributed under Apache License, Version 2.0.
 #
+# mypy: ignore-errors
 """
 This module contains functions that run the greedy detector for dense regions in a sparse matrix.
 use aveDegree or sqrtWeightedAveDegree or logWeightedAveDegree on a sparse matrix,
