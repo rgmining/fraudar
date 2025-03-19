@@ -94,9 +94,6 @@ replace = 'version = "{new_version}"'
 [[tool.bumpversion.files]]
 filename = "README.rst"
 
-[[tool.bumpversion.files]]
-filename = "fraudar/__version__.py"
-
 [tool.mypy]
 files = "fraudar/*.py,tests/**/*.py"
 warn_return_any = true
