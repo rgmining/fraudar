@@ -153,7 +153,7 @@ class ReviewGraph:
         self._algo = algo
         self._blocks = blocks
 
-    def new_reviewer(self, name: str) -> Reviewer:
+    def new_reviewer(self, name: str, anomalous_score: float | None = None) -> Reviewer:
         """Create a new reviewer.
 
         Args:
@@ -162,7 +162,7 @@ class ReviewGraph:
         Returns:
           a new reviewer object.
         """
-        r = Reviewer(self, name)
+        r = Reviewer(self, name, anomalous_score or 0)
         self.reviewers.append(r)
         return r
 
@@ -179,7 +179,7 @@ class ReviewGraph:
         self.products.append(p)
         return p
 
-    def add_review(self, reviewer: Reviewer, product: Product, rating: float) -> float:
+    def add_review(self, reviewer: Reviewer, product: Product, rating: float, _time: int | None = None) -> float:
         """Add a review from a reviewer to a product.
 
         Args:
