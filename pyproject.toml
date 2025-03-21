@@ -67,7 +67,7 @@ sphinx-autobuild = "^2024.10.3"
 
 [tool.ruff]
 target-version = "py311"
-line-length = 120
+line-length = 79
 
 [tool.pytest.ini_options]
 addopts = "--cov=fraudar --cov-branch --cov-report=term-missing --cov-report=xml"
