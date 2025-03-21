@@ -40,7 +40,11 @@ be set the sub algorithm to be used.
 
 from typing import Final
 
-from fraudar.export.greedy import aveDegree, logWeightedAveDegree, sqrtWeightedAveDegree
+from fraudar.export.greedy import (
+    aveDegree,
+    logWeightedAveDegree,
+    sqrtWeightedAveDegree,
+)
 from fraudar.graph import ReviewGraph
 
 __all__: Final = (

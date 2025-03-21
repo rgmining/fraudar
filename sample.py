@@ -56,7 +56,10 @@ def analyze(blocks: int) -> None:
     detected = [r for r in graph.reviewers if r.anomalous_score]
     correct = [r for r in detected if "anomaly" in r.name]
 
-    print(len(correct) / len(detected), len(correct) / synthetic.ANOMALOUS_REVIEWER_SIZE)
+    print(
+        len(correct) / len(detected),
+        len(correct) / synthetic.ANOMALOUS_REVIEWER_SIZE,
+    )
 
 
 if __name__ == "__main__":

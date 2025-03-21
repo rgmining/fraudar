@@ -84,7 +84,9 @@ class Reviewer(Node):
 
     __slots__ = ("anomalous_score",)
 
-    def __init__(self, graph: "ReviewGraph", name: str, anomalous_score: float = 0) -> None:
+    def __init__(
+        self, graph: "ReviewGraph", name: str, anomalous_score: float = 0
+    ) -> None:
         super().__init__(graph, name)
         self.anomalous_score = anomalous_score
 
@@ -145,7 +147,9 @@ class ReviewGraph:
     _algo: Final[Any]
     _blocks: Final[int]
 
-    def __init__(self, blocks: int = 1, algo: Any = logWeightedAveDegree) -> None:
+    def __init__(
+        self, blocks: int = 1, algo: Any = logWeightedAveDegree
+    ) -> None:
         self.reviewers = []
         self.products = []
         self.reviews = defaultdict(dict)
@@ -153,7 +157,9 @@ class ReviewGraph:
         self._algo = algo
         self._blocks = blocks
 
-    def new_reviewer(self, name: str, anomalous_score: float | None = None) -> Reviewer:
+    def new_reviewer(
+        self, name: str, anomalous_score: float | None = None
+    ) -> Reviewer:
         """Create a new reviewer.
 
         Args:
@@ -179,7 +185,13 @@ class ReviewGraph:
         self.products.append(p)
         return p
 
-    def add_review(self, reviewer: Reviewer, product: Product, rating: float, _time: int | None = None) -> float:
+    def add_review(
+        self,
+        reviewer: Reviewer,
+        product: Product,
+        rating: float,
+        _time: int | None = None,
+    ) -> float:
         """Add a review from a reviewer to a product.
 
         Args:
