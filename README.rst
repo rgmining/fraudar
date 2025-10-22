@@ -41,7 +41,7 @@ https://bhooi.github.io/projects/fraudar/index.html.
    :target: https://www.gnu.org/copyleft/gpl.html
 .. |Build Status| image:: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml/badge.svg
    :target: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml
-.. |Release| image:: https://img.shields.io/badge/release-0.7.5-brightgreen.svg
+.. |Release| image:: https://img.shields.io/badge/release-0.7.6-brightgreen.svg
    :target: https://pypi.org/project/rgmining-fraudar/
 .. |Logo| image:: https://rgmining.github.io/fraudar/_static/image.png
    :target: https://rgmining.github.io/fraudar/

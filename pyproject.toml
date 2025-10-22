@@ -5,7 +5,7 @@ requires = [ "poetry-core>=1" ]
 
 [project]
 name = "rgmining-fraudar"
-version = "0.7.5"
+version = "0.7.6"
 description = "A wrapper of Fraudar algorithm for Review graph mining project"
 readme = "README.rst"
 keywords = [ "algorithm", "fraudar", "graph", "kdd", "mining", "review" ]
@@ -80,7 +80,7 @@ omit = [ "fraudar/export/*" ]
 exclude_lines = [ "\\.{3}" ]
 
 [tool.bumpversion]
-current_version = "0.7.5"
+current_version = "0.7.6"
 commit = true
 pre_commit_hooks = [
   "poetry lock",
