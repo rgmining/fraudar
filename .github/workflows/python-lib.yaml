@@ -28,10 +28,3 @@ jobs:
           key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Check files
         run: poetry run pre-commit run --all-files
-      - name: Report test coverage to Code Climate
-        uses: paambaati/codeclimate-action@v6.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: coverage.xml:coverage.py
-        if: ${{ github.ref == 'refs/heads/main' && matrix.python-version == '3.13' }}

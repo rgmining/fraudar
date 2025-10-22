@@ -1,7 +1,7 @@
 A wrapper of FRAUDAR algorithm
 ==============================
 
-|GPLv3| |Build Status| |Maintainability| |Test Coverage| |Release|
+|GPLv3| |Build Status| |Release|
 
 |Logo|
 
@@ -41,10 +41,6 @@ https://bhooi.github.io/projects/fraudar/index.html.
    :target: https://www.gnu.org/copyleft/gpl.html
 .. |Build Status| image:: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml/badge.svg
    :target: https://github.com/rgmining/fraudar/actions/workflows/python-lib.yaml
-.. |Maintainability| image:: https://api.codeclimate.com/v1/badges/4c4c3df79b33f65b77cd/maintainability
-   :target: https://codeclimate.com/github/rgmining/fraudar/maintainability
-.. |Test Coverage| image:: https://api.codeclimate.com/v1/badges/4c4c3df79b33f65b77cd/test_coverage
-   :target: https://codeclimate.com/github/rgmining/fraudar/test_coverage
 .. |Release| image:: https://img.shields.io/badge/release-0.7.5-brightgreen.svg
    :target: https://pypi.org/project/rgmining-fraudar/
 .. |Logo| image:: https://rgmining.github.io/fraudar/_static/image.png
