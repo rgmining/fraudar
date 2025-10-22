@@ -5,7 +5,7 @@ requires = [ "poetry-core>=1" ]
 
 [project]
 name = "rgmining-fraudar"
-version = "0.7.5"
+version = "0.7.6"
 description = "A wrapper of Fraudar algorithm for Review graph mining project"
 readme = "README.rst"
 keywords = [ "algorithm", "fraudar", "graph", "kdd", "mining", "review" ]
@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering :: Information Analysis",
   "Topic :: Software Development :: Libraries",
 ]
@@ -79,7 +80,7 @@ omit = [ "fraudar/export/*" ]
 exclude_lines = [ "\\.{3}" ]
 
 [tool.bumpversion]
-current_version = "0.7.5"
+current_version = "0.7.6"
 commit = true
 pre_commit_hooks = [
   "poetry lock",
