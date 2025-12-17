@@ -31,7 +31,6 @@ repos:
     rev: "2.2.1"
     hooks:
       - id: poetry-check
-      - id: poetry-lock
   - repo: local
     hooks:
       - id: pytest
